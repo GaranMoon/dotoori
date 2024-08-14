@@ -25,7 +25,7 @@ function Grid({ mode, tdProps }: Props) {
                 return (
                   <td
                     key={__i}
-                    style={{ backgroundColor: colorMap[key] as string }}
+                    style={{ backgroundColor: colorMap[key] }}
                     {...(tdProps ? tdProps(key) : undefined)}
                   />
                 );
