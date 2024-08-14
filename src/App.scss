@@ -1,0 +1,18 @@
+@font-face {
+  font-family: 'DOS';
+  font-style: normal;
+  font-weight: normal;
+  src: url('asset/font/Fixedsys500c.eot');
+  src:
+    url('asset/font/Fixedsys500c.woff') format('woff'),
+    url('asset/font/Fixedsys500c.ttf') format('truetype'),
+    url('asset/font/Fixedsys500c.svg') format('svg');
+}
+
+body {
+  margin: 0;
+  font-family: DOS, Monaco, Menlo, Consolas, 'Courier New', monospace;
+  background-color: lightgray;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
