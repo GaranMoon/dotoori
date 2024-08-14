@@ -6,7 +6,7 @@ export interface ButtonProps {
   title: string | ReactNode;
   size?: 'sm' | 'md';
   disabled?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 function Button({ title, size = 'md', disabled, onClick }: ButtonProps) {

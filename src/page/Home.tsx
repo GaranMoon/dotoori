@@ -1,3 +1,4 @@
+import { Modal } from 'component/atom';
 import { BottomArea, MiddleArea, TopArea } from 'component/template';
 import { usePickerStore } from 'store/PickerStore';
 
@@ -15,6 +16,7 @@ function Home() {
       <TopArea />
       <MiddleArea />
       <BottomArea />
+      <Modal />
     </div>
   );
 }
