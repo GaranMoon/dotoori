@@ -1,17 +1,17 @@
 import { ButtonGroup } from 'component/molecule';
 
 interface Props {
-  onReset: () => void;
+  onClickReset: () => void;
 }
 
-function ConfigButtonSet({ onReset }: Props) {
+function ConfigButtonSet({ onClickReset }: Props) {
   return (
     <ButtonGroup
       direction="column"
       buttons={[
-        { title: 'SAVE', onClick: onReset },
-        { title: 'SHARE', onClick: onReset },
-        { title: 'RESET', onClick: onReset },
+        { title: 'SAVE', onClick: () => onClickReset() },
+        { title: 'SHARE', onClick: () => onClickReset() },
+        { title: 'RESET', onClick: () => onClickReset() },
       ]}
     />
   );

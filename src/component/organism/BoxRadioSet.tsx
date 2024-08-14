@@ -4,23 +4,18 @@ import { useSettingStore } from 'store/SettingStore';
 const options = [15, 20, 25, 30, 35];
 
 interface Props {
-  onReset: () => void;
+  onChangeBox: (e: number) => void;
 }
 
-function BoxRadioSet({ onReset }: Props) {
-  const { numOfBoxs, setNumOfBoxs } = useSettingStore((state) => state);
-
-  const handleChange = (select: number) => {
-    setNumOfBoxs(select);
-    onReset();
-  };
+function BoxRadioSet({ onChangeBox }: Props) {
+  const { numOfBoxs } = useSettingStore((state) => state);
 
   return (
     <RadioGroup
       radios={options.map((_, _i) => ({
         title: `${_} Boxs`,
         selected: _ === numOfBoxs,
-        onClick: () => handleChange(_),
+        onClick: () => onChangeBox(_),
       }))}
     />
   );
