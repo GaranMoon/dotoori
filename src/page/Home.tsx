@@ -1,7 +1,22 @@
+import { BottomArea, MiddleArea, TopArea } from 'component/template';
+import { usePickerStore } from 'store/PickerStore';
+
 import styles from './Home.module.scss';
 
 function Home() {
-  return <div className={styles.container}></div>;
+  const { isDrawing, setIsDrawing } = usePickerStore((state) => state);
+
+  const handleStopDraw = () => {
+    if (isDrawing) setIsDrawing(false);
+  };
+
+  return (
+    <div className={styles.container} onMouseUp={handleStopDraw}>
+      <TopArea />
+      <MiddleArea />
+      <BottomArea />
+    </div>
+  );
 }
 
 export default Home;
