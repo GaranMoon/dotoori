@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 10px;
+    aspect-ratio: 1 / 1;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 50%;
+
+    .light {
+      width: 8px;
+      aspect-ratio: 1 / 1;
+      background-color: green;
+      border-radius: 50%;
+      position: relative;
+
+      .glow {
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        width: 3px;
+        aspect-ratio: 1 / 1;
+        background-color: #ffffff50;
+        border-radius: 50%;
+      }
+
+      &.on {
+        background-color: lime;
+
+        .glow {
+          background-color: white;
+        }
+      }
+    }
+  }
+
+  .text {
+    padding-top: 0.5px;
+  }
+}

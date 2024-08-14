@@ -1,0 +1,27 @@
+.container {
+  aspect-ratio: 1 / 1;
+  background-color: white;
+  border: 1px solid black;
+
+  &.sm {
+    width: 20px;
+  }
+
+  &.md {
+    width: 50px;
+  }
+
+  &.picked,
+  &.used {
+    margin: 0 -1px;
+    border: 2px solid;
+  }
+
+  &.picked {
+    border-color: red;
+  }
+
+  &.used {
+    border-color: yellow;
+  }
+}

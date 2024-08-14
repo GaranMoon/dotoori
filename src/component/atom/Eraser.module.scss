@@ -1,0 +1,26 @@
+.container {
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  background-color: white;
+  border: 1px solid black;
+  position: relative;
+  overflow: hidden;
+
+  &.picked {
+    border: 2px solid red;
+  }
+
+  .line {
+    position: absolute;
+    top: 24.5px;
+    left: -25px;
+    width: 100px;
+    height: 1px;
+    background-color: black;
+    transform: rotate(-45deg);
+
+    &.reverse {
+      transform: rotate(45deg);
+    }
+  }
+}
