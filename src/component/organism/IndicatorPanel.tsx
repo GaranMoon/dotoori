@@ -8,9 +8,9 @@ import { useColorMapStore } from 'store/ColorMapStore';
 import { usePickerStore } from 'store/PickerStore';
 import { Tool } from 'type/common';
 
-import styles from './PanelLeft.module.scss';
+import styles from './IndicatorPanel.module.scss';
 
-function PanelLeft() {
+function IndicatorPanel() {
   const { picker, isEraser, setIsEraser } = usePickerStore((state) => state);
   const { history, historyIndex, setColorMap, setHistoryIndex } = useColorMapStore((state) => state);
   const isColorPicked = !!picker && !isEraser ? Tool.PICKED : undefined;
@@ -87,4 +87,4 @@ function PanelLeft() {
   );
 }
 
-export default PanelLeft;
+export default IndicatorPanel;

@@ -4,9 +4,9 @@ import { useModalStore } from 'store/ModalStore';
 import { usePickerStore } from 'store/PickerStore';
 import { useSettingStore } from 'store/SettingStore';
 
-import styles from './PanelRight.module.scss';
+import styles from './ConfigPanel.module.scss';
 
-function PanelRight() {
+function ConfigPanel() {
   const { setPicker, setIsEraser } = usePickerStore((state) => state);
   const { history, setColorMap, setHistory, setHistoryIndex } = useColorMapStore((state) => state);
   const { setNumOfBoxs } = useSettingStore((state) => state);
@@ -44,4 +44,4 @@ function PanelRight() {
   );
 }
 
-export default PanelRight;
+export default ConfigPanel;
