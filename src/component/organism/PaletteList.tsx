@@ -6,6 +6,8 @@ import { Palette } from 'component/molecule';
 import { colorData } from 'data/palette';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { usePickerStore } from 'store/PickerStore';
+import { useSettingStore } from 'store/SettingStore';
+import { COLLAPSE_MAX, LayoutMode } from 'type/common';
 
 import styles from './PaletteList.module.scss';
 
@@ -17,13 +19,24 @@ function PaletteList() {
   const [usedColors, setUsedColors] = useState<string[]>([]);
   const { picker, isEraser, isDrawing, setPicker, setIsEraser } = usePickerStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
+  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
+  const { layoutMode, setLayoutMode } = useSettingStore((state) => state);
+  const isCollapseMode = layoutMode === LayoutMode.COLLAPSE;
 
   useEffect(() => {
-    const handleResize = () => setSplitList(getSplitList());
-    handleResize();
+    const handleResize = () => setScreenWidth(window.innerWidth);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    setSplitList(getSplitList(screenWidth));
+    if (screenWidth > COLLAPSE_MAX) {
+      if (isCollapseMode) setLayoutMode(LayoutMode.NONE);
+      return;
+    }
+    if (!isCollapseMode) setLayoutMode(LayoutMode.COLLAPSE);
+  }, [screenWidth]);
 
   useEffect(() => {
     if (!isDrawing) setUsedColors(Object.values(colorMap));
@@ -56,10 +69,10 @@ function PaletteList() {
 
 export default PaletteList;
 
-const getSplitList = () => {
+const getSplitList = (screenWidth: number) => {
   const result = [];
   const totalCount = colorList.length;
-  const columnCount = Math.floor(window.innerWidth / 170);
+  const columnCount = Math.floor(screenWidth / 170);
   const rowCount = Math.ceil(totalCount / columnCount);
   for (let i = 0; i < totalCount; i += rowCount) {
     result.push(colorList.slice(i, i + rowCount));
