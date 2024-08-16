@@ -1,3 +1,5 @@
+import { getClass } from 'util/common';
+
 import { Tool } from 'type/common';
 
 import styles from './Eraser.module.scss';
@@ -8,12 +10,10 @@ interface Props {
 }
 
 function Eraser({ highlight, onClick }: Props) {
-  const containerStyle = `${styles.container} ${styles[highlight || '']}`;
-
   return (
-    <div className={containerStyle} onClick={onClick}>
+    <div className={getClass(['container', highlight], styles)} onClick={onClick}>
       <div className={styles.line} />
-      <div className={`${styles.line} ${styles.reverse}`} />
+      <div className={getClass(['line', 'reverse'], styles)} />
     </div>
   );
 }

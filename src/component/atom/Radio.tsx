@@ -1,3 +1,5 @@
+import { getClass } from 'util/common';
+
 import styles from './Radio.module.scss';
 
 export interface RadioProps {
@@ -7,12 +9,10 @@ export interface RadioProps {
 }
 
 function Radio({ title, selected, onClick }: RadioProps) {
-  const lightStyle = `${styles.light} ${styles[selected ? 'on' : '']}`;
-
   return (
     <div className={styles.container} onClick={onClick}>
       <div className={styles.button}>
-        <div className={lightStyle}>
+        <div className={getClass(['light', selected ? 'on' : ''], styles)}>
           <div className={styles.glow} />
         </div>
       </div>

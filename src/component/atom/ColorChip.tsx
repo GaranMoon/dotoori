@@ -1,3 +1,5 @@
+import { getClass } from 'util/common';
+
 import { Tool } from 'type/common';
 
 import styles from './ColorChip.module.scss';
@@ -10,9 +12,13 @@ interface Props {
 }
 
 function ColorChip({ size = 'sm', color, highlight, onClick }: Props) {
-  const containerStyle = `${styles.container} ${styles[size]} ${styles[highlight || '']}`;
-
-  return <div className={containerStyle} style={{ backgroundColor: color }} onClick={onClick} />;
+  return (
+    <div
+      className={getClass(['container', size, highlight], styles)}
+      style={{ backgroundColor: color }}
+      onClick={onClick}
+    />
+  );
 }
 
 export default ColorChip;

@@ -1,4 +1,4 @@
-import { getColorMapKey } from 'util/common';
+import { getClass, getColorMapKey } from 'util/common';
 import styles from './Grid.module.scss';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
@@ -12,10 +12,9 @@ interface Props {
 function Grid({ mode, tdProps }: Props) {
   const { numOfBoxs } = useSettingStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
-  const containerStyle = mode ? styles.editorContainer : styles.container;
 
   return (
-    <div className={containerStyle}>
+    <div className={getClass(['container', mode], styles)}>
       <table>
         <tbody>
           {[...Array(numOfBoxs)].map((_, _i) => (

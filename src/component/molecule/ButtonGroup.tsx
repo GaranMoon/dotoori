@@ -1,3 +1,5 @@
+import { getClass } from 'util/common';
+
 import { Button, ButtonProps } from 'component/atom';
 
 import styles from './ButtonGroup.module.scss';
@@ -8,10 +10,8 @@ interface Props {
 }
 
 function ButtonGroup({ direction = 'row', buttons }: Props) {
-  const containerStyle = `${styles.container} ${styles[direction]}`;
-
   return (
-    <div className={containerStyle}>
+    <div className={getClass(['container', direction], styles)}>
       {buttons.map((_, _i) => (
         <Button key={_i} {..._} />
       ))}

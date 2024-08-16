@@ -1,5 +1,7 @@
 import { ReactNode } from 'react';
 
+import { getClass } from 'util/common';
+
 import styles from './Button.module.scss';
 
 export interface ButtonProps {
@@ -10,10 +12,8 @@ export interface ButtonProps {
 }
 
 function Button({ title, size = 'md', disabled, onClick }: ButtonProps) {
-  const containerStyle = `${styles.container} ${styles[size]} ${styles[disabled ? 'disabled' : '']}`;
-
   return (
-    <div className={containerStyle} onClick={onClick}>
+    <div className={getClass(['container', size, disabled ? 'disabled' : ''], styles)} onClick={onClick}>
       {title}
     </div>
   );

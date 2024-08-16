@@ -7,3 +7,11 @@ export const getColorMapKey = (xIndex: number, yIndex: number) => {
 export const cutWords = (text: string) => {
   return text.replace(/([A-Z])/g, ' $1').trim();
 };
+
+// className 반환
+export const getClass = (classNameList: (string | undefined)[], styles: { [key: string]: string }) => {
+  return classNameList
+    .map((_) => (_ ? styles[_] : ''))
+    .toString()
+    .replaceAll(',', ' ');
+};

@@ -1,5 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
 
+import { getClass } from 'util/common';
+
 import { ButtonProps, ModalTemplate } from 'component/atom';
 import { useModalStore } from 'store/ModalStore';
 import { MODAL_DELAY } from 'type/common';
@@ -17,8 +19,6 @@ export interface ModalProps {
 function Modal() {
   const { modal, setModal } = useModalStore((state) => state);
   const [_modal, _setModal] = useState<ModalProps | null>(null);
-  const containerStyle = `${styles.container} ${styles[modal ? 'fadeIn' : 'fadeOut']}`;
-  const modalStyle = `${styles.modal} ${styles[modal ? 'appear' : 'disappear']}`;
 
   useEffect(() => {
     if (modal) _setModal({ ...modal });
@@ -30,9 +30,9 @@ function Modal() {
   };
 
   return _modal ? (
-    <div className={containerStyle}>
+    <div className={getClass(['container', modal ? 'fadeIn' : 'fadeOut'], styles)}>
       <div className={styles.overlay} onClick={handleClose} />
-      <div className={modalStyle}>
+      <div className={getClass(['modal', modal ? 'appear' : 'disappear'], styles)}>
         <ModalTemplate modal={_modal} onClose={handleClose} />
       </div>
     </div>
