@@ -13,7 +13,10 @@ export interface ButtonProps {
 
 function Button({ title, size = 'md', disabled, onClick }: ButtonProps) {
   return (
-    <div className={getClass(['container', size, disabled ? 'disabled' : ''], styles)} onClick={onClick}>
+    <div
+      className={getClass(['container', size, disabled ? 'disabled' : ''], styles)}
+      onClick={!disabled ? onClick : undefined}
+    >
       {title}
     </div>
   );
