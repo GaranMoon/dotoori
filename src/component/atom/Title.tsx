@@ -10,7 +10,7 @@ function Title() {
 
   return (
     <div className={getClass(['container', layoutMode], styles)}>
-      <img src={acorn} />
+      <img src={acorn} alt="" />
       <div className={styles.text}>Dotoori</div>
     </div>
   );
