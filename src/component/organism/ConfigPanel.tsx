@@ -3,13 +3,13 @@ import { getClass } from 'util/common';
 import { BoxRadioSet, ConfigButtonSet } from 'component/organism';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useModalStore } from 'store/ModalStore';
-import { usePickerStore } from 'store/PickerStore';
 import { useSettingStore } from 'store/SettingStore';
+import { useToolStore } from 'store/ToolStore';
 
 import styles from './ConfigPanel.module.scss';
 
 function ConfigPanel() {
-  const { setPicker, setIsEraser } = usePickerStore((state) => state);
+  const { setPicker, setIsEraser } = useToolStore((state) => state);
   const { history, setColorMap, setHistory, setHistoryIndex } = useColorMapStore((state) => state);
   const { layoutMode, setIsShowConfig, setNumOfBoxs } = useSettingStore((state) => state);
   const { setModal } = useModalStore((state) => state);

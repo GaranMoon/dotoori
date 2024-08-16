@@ -5,8 +5,8 @@ import { cutWords } from 'util/common';
 import { Palette } from 'component/molecule';
 import { colorData } from 'data/palette';
 import { useColorMapStore } from 'store/ColorMapStore';
-import { usePickerStore } from 'store/PickerStore';
 import { useSettingStore } from 'store/SettingStore';
+import { useToolStore } from 'store/ToolStore';
 import { COLLAPSE_MAX, LayoutMode } from 'type/common';
 
 import styles from './PaletteList.module.scss';
@@ -17,7 +17,7 @@ const colorList: Color[] = Object.entries(colorData);
 function PaletteList() {
   const [splitList, setSplitList] = useState<Color[][]>([]);
   const [usedColors, setUsedColors] = useState<string[]>([]);
-  const { picker, isEraser, isDrawing, setPicker, setIsEraser } = usePickerStore((state) => state);
+  const { picker, isEraser, isDrawing, setPicker, setIsEraser } = useToolStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
   const { layoutMode, setLayoutMode, setIsShowConfig } = useSettingStore((state) => state);

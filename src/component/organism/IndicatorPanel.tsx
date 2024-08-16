@@ -7,15 +7,15 @@ import { ButtonGroup } from 'component/molecule';
 import { BiUndo } from 'react-icons/bi';
 import { BiRedo } from 'react-icons/bi';
 import { useColorMapStore } from 'store/ColorMapStore';
-import { usePickerStore } from 'store/PickerStore';
 import { useSettingStore } from 'store/SettingStore';
+import { useToolStore } from 'store/ToolStore';
 import { LayoutMode, Tool } from 'type/common';
 
 import styles from './IndicatorPanel.module.scss';
 
 function IndicatorPanel() {
   const { layoutMode } = useSettingStore((state) => state);
-  const { picker, isEraser, setIsEraser } = usePickerStore((state) => state);
+  const { picker, isEraser, setIsEraser } = useToolStore((state) => state);
   const { history, historyIndex, setColorMap, setHistoryIndex } = useColorMapStore((state) => state);
   const isColorPicked = !!picker && !isEraser ? Tool.PICKED : undefined;
   const isEraserPicked = isEraser ? Tool.PICKED : undefined;

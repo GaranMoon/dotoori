@@ -9,7 +9,7 @@ interface Props {
   setIsDrawing: (e: boolean) => void;
 }
 
-export const usePickerStore = create<Props>((set) => ({
+export const useToolStore = create<Props>((set) => ({
   picker: '',
   isEraser: false,
   isDrawing: false,

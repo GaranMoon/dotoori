@@ -5,8 +5,8 @@ import { boxOptions } from 'component/organism/BoxRadioSet';
 import { BottomArea, MiddleArea, TopArea } from 'component/template';
 import { useSearchParams } from 'react-router-dom';
 import { useColorMapStore } from 'store/ColorMapStore';
-import { usePickerStore } from 'store/PickerStore';
 import { useSettingStore } from 'store/SettingStore';
+import { useToolStore } from 'store/ToolStore';
 import { Color } from 'type/common';
 
 import styles from './Home.module.scss';
@@ -14,7 +14,7 @@ import styles from './Home.module.scss';
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { setNumOfBoxs } = useSettingStore((state) => state);
-  const { isDrawing, setIsDrawing } = usePickerStore((state) => state);
+  const { isDrawing, setIsDrawing } = useToolStore((state) => state);
   const { colorMap, history, historyIndex, setColorMap, setHistory, setHistoryIndex } = useColorMapStore(
     (state) => state,
   );
