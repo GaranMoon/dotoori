@@ -4,7 +4,7 @@ import styles from './BottomArea.module.scss';
 
 function BottomArea() {
   return (
-    <div className={styles.container} style={{ touchAction: 'none' }}>
+    <div className={styles.container}>
       <Footer />
     </div>
   );

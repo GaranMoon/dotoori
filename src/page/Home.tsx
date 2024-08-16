@@ -12,7 +12,7 @@ function Home() {
   };
 
   return (
-    <div className={styles.container} onMouseUp={handleStopDraw}>
+    <div className={styles.container} style={{ touchAction: 'none' }} onMouseUp={handleStopDraw}>
       <TopArea />
       <MiddleArea />
       <BottomArea />
