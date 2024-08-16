@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Modal } from 'component/atom';
 import { boxOptions } from 'component/organism/BoxRadioSet';
 import { BottomArea, MiddleArea, TopArea } from 'component/template';
+import LZString from 'lz-string';
 import { useSearchParams } from 'react-router-dom';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
@@ -28,7 +29,7 @@ function Home() {
     const box = searchParams.get('box');
     if (shared && box) {
       try {
-        const map = JSON.parse(decodeURIComponent(shared));
+        const map = JSON.parse(LZString.decompressFromEncodedURIComponent(shared));
         if (typeof map === 'object') {
           setColorMap(map);
           addHistory(map);
