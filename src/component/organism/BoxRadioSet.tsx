@@ -1,7 +1,7 @@
 import { RadioGroup } from 'component/molecule';
 import { useSettingStore } from 'store/SettingStore';
 
-const options = [15, 20, 25, 30, 35];
+export const boxOptions = [15, 20, 25, 30, 35];
 
 interface Props {
   onChangeBox: (e: number) => void;
@@ -12,7 +12,7 @@ function BoxRadioSet({ onChangeBox }: Props) {
 
   return (
     <RadioGroup
-      radios={options.map((_, _i) => ({
+      radios={boxOptions.map((_, _i) => ({
         title: `${_} Boxs`,
         selected: _ === numOfBoxs,
         onClick: () => onChangeBox(_),
