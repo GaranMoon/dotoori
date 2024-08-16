@@ -12,8 +12,8 @@ interface Props {
 
 export const useColorMapStore = create<Props>((set) => ({
   colorMap: {},
-  history: [],
-  historyIndex: -1,
+  history: [{}],
+  historyIndex: 0,
   setColorMap: (colorMap) => set(() => ({ colorMap })),
   setHistory: (history) => set(() => ({ history })),
   setHistoryIndex: (historyIndex) => set(() => ({ historyIndex })),

@@ -1,19 +1,10 @@
-import { useEffect } from 'react';
-
 import { Grid } from 'component/atom';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { usePickerStore } from 'store/PickerStore';
-import { Color } from 'type/common';
 
 function GridEditor() {
   const { picker, isEraser, isDrawing, setIsDrawing } = usePickerStore((state) => state);
-  const { colorMap, history, historyIndex, setColorMap, setHistory, setHistoryIndex } = useColorMapStore(
-    (state) => state,
-  );
-
-  useEffect(() => {
-    if (!isDrawing) handleHistory();
-  }, [isDrawing]);
+  const { colorMap, setColorMap } = useColorMapStore((state) => state);
 
   const handleDraw = (key: string, isStart?: boolean) => {
     if (!picker || (!isStart && !isDrawing)) return;
@@ -25,18 +16,6 @@ function GridEditor() {
     }
     colorMap[key] = picker;
     setColorMap(colorMap);
-  };
-
-  const handleHistory = () => {
-    let newHistory: Color[] = [...history];
-    const newIndex = historyIndex + 1;
-    const lastIndex = newHistory.length - 1;
-    if (newIndex <= lastIndex) {
-      newHistory = newHistory.slice(0, newIndex);
-    }
-    newHistory.push({ ...colorMap });
-    setHistory(newHistory);
-    setHistoryIndex(newIndex);
   };
 
   return (
