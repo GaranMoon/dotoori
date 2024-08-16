@@ -10,11 +10,11 @@ interface Props {
 }
 
 function Grid({ mode, tdProps }: Props) {
-  const { numOfBoxs } = useSettingStore((state) => state);
+  const { layoutMode, numOfBoxs } = useSettingStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
 
   return (
-    <div className={getClass(['container', mode], styles)}>
+    <div className={getClass(['container', layoutMode, mode], styles)}>
       <table>
         <tbody>
           {[...Array(numOfBoxs)].map((_, _i) => (

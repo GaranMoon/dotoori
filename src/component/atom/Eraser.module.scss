@@ -25,4 +25,13 @@
       transform: rotate(45deg);
     }
   }
+
+  &.collapse {
+    width: 40px;
+
+    .line {
+      top: 19.5px;
+      left: -30px;
+    }
+  }
 }

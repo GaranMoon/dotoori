@@ -6,4 +6,13 @@
   justify-content: center;
   gap: 90px;
   padding-left: 20px;
+
+  &.collapse {
+    flex-direction: row;
+    gap: 0;
+    padding: 0 25px;
+    height: 100%;
+    border: 1px solid black;
+    box-sizing: border-box;
+  }
 }

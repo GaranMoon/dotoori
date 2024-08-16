@@ -20,7 +20,7 @@ function PaletteList() {
   const { picker, isEraser, isDrawing, setPicker, setIsEraser } = usePickerStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-  const { layoutMode, setLayoutMode } = useSettingStore((state) => state);
+  const { layoutMode, setLayoutMode, setIsShowConfig } = useSettingStore((state) => state);
   const isCollapseMode = layoutMode === LayoutMode.COLLAPSE;
 
   useEffect(() => {
@@ -31,11 +31,14 @@ function PaletteList() {
 
   useEffect(() => {
     setSplitList(getSplitList(screenWidth));
-    if (screenWidth > COLLAPSE_MAX) {
-      if (isCollapseMode) setLayoutMode(LayoutMode.NONE);
+    if (screenWidth < COLLAPSE_MAX) {
+      if (!isCollapseMode) setLayoutMode(LayoutMode.COLLAPSE);
       return;
     }
-    if (!isCollapseMode) setLayoutMode(LayoutMode.COLLAPSE);
+    if (isCollapseMode) {
+      setLayoutMode(LayoutMode.NONE);
+      setIsShowConfig(false);
+    }
   }, [screenWidth]);
 
   useEffect(() => {

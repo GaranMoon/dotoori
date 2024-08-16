@@ -1,3 +1,5 @@
+import { getClass } from 'util/common';
+
 import { BoxRadioSet, ConfigButtonSet } from 'component/organism';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useModalStore } from 'store/ModalStore';
@@ -9,7 +11,7 @@ import styles from './ConfigPanel.module.scss';
 function ConfigPanel() {
   const { setPicker, setIsEraser } = usePickerStore((state) => state);
   const { history, setColorMap, setHistory, setHistoryIndex } = useColorMapStore((state) => state);
-  const { setNumOfBoxs } = useSettingStore((state) => state);
+  const { layoutMode, setIsShowConfig, setNumOfBoxs } = useSettingStore((state) => state);
   const { setModal } = useModalStore((state) => state);
 
   const handleClickReset = (numOfBoxs?: number) => {
@@ -33,11 +35,12 @@ function ConfigPanel() {
     setIsEraser(false);
     setHistory([{}]);
     setHistoryIndex(0);
+    setIsShowConfig(false);
     if (numOfBoxs) setNumOfBoxs(numOfBoxs);
   };
 
   return (
-    <div className={styles.container}>
+    <div className={getClass(['container', layoutMode], styles)}>
       <ConfigButtonSet onClickReset={handleClickReset} />
       <BoxRadioSet onChangeBox={handleClickReset} />
     </div>

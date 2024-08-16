@@ -1,16 +1,20 @@
 import { useEffect } from 'react';
 
-import { ColorChip, Eraser, Grid } from 'component/atom';
+import { getClass } from 'util/common';
+
+import { Button, ButtonProps, ColorChip, Eraser, Grid } from 'component/atom';
 import { ButtonGroup } from 'component/molecule';
 import { BiUndo } from 'react-icons/bi';
 import { BiRedo } from 'react-icons/bi';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { usePickerStore } from 'store/PickerStore';
-import { Tool } from 'type/common';
+import { useSettingStore } from 'store/SettingStore';
+import { LayoutMode, Tool } from 'type/common';
 
 import styles from './IndicatorPanel.module.scss';
 
 function IndicatorPanel() {
+  const { layoutMode } = useSettingStore((state) => state);
   const { picker, isEraser, setIsEraser } = usePickerStore((state) => state);
   const { history, historyIndex, setColorMap, setHistoryIndex } = useColorMapStore((state) => state);
   const isColorPicked = !!picker && !isEraser ? Tool.PICKED : undefined;
@@ -56,33 +60,50 @@ function IndicatorPanel() {
     setIsEraser(isActivate);
   };
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.indicator}>
+  const getButtonProps = (direction?: 'undo' | 'redo'): ButtonProps => {
+    return direction === 'undo'
+      ? { title: <BiUndo />, size: 'sm', disabled: !historyIndex, onClick: handleUndo }
+      : { title: <BiRedo />, size: 'sm', disabled: historyIndex === history.length - 1, onClick: handleRedo };
+  };
+
+  const renderGrid = () => {
+    return (
+      <div className={styles.square}>
         <Grid />
       </div>
-      <div className={styles.indicator}>
-        <ColorChip size="md" color={picker} highlight={isColorPicked} onClick={() => handleEraser(false)} />
+    );
+  };
+
+  const renderColorChop = (size: 'md' | 'lg') => {
+    return (
+      <div className={styles.square}>
+        <ColorChip size={size} color={picker} highlight={isColorPicked} onClick={() => handleEraser(false)} />
       </div>
-      <div className={styles.indicator}>
+    );
+  };
+
+  const renderEraser = () => {
+    return (
+      <div className={styles.square}>
         <Eraser highlight={isEraserPicked} onClick={() => handleEraser(true)} />
       </div>
-      <ButtonGroup
-        buttons={[
-          {
-            title: <BiUndo />,
-            size: 'sm',
-            disabled: !historyIndex,
-            onClick: handleUndo,
-          },
-          {
-            title: <BiRedo />,
-            size: 'sm',
-            disabled: historyIndex === history.length - 1,
-            onClick: handleRedo,
-          },
-        ]}
-      />
+    );
+  };
+
+  return layoutMode !== LayoutMode.COLLAPSE ? (
+    <div className={styles.container}>
+      {renderGrid()}
+      {renderColorChop('lg')}
+      {renderEraser()}
+      <ButtonGroup buttons={[getButtonProps('undo'), getButtonProps('redo')]} />
+    </div>
+  ) : (
+    <div className={getClass(['container', layoutMode], styles)}>
+      <Button {...getButtonProps('undo')} />
+      {renderColorChop('md')}
+      {renderGrid()}
+      {renderEraser()}
+      <Button {...getButtonProps('redo')} />
     </div>
   );
 }

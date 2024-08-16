@@ -5,7 +5,7 @@ import { Tool } from 'type/common';
 import styles from './ColorChip.module.scss';
 
 interface Props {
-  size?: 'sm' | 'md';
+  size?: 'sm' | 'md' | 'lg';
   color: string;
   highlight?: Tool;
   onClick?: () => void;

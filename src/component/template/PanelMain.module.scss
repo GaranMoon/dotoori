@@ -6,4 +6,9 @@
   padding: 0 20px 35px 20px;
   padding-bottom: 35px;
   position: relative;
+
+  &.collapse {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
 }
