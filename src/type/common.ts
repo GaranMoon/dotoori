@@ -1,5 +1,6 @@
 export const MODAL_DELAY = 300;
 export const COLLAPSE_MAX = 760;
+export const CAPTURE = 'capture';
 
 export enum LayoutMode {
   COLLAPSE = 'collapse',

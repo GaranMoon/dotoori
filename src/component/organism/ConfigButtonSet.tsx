@@ -1,8 +1,11 @@
+import styles from 'component/atom/Grid.module.scss';
 import { ButtonGroup } from 'component/molecule';
 import copy from 'copy-to-clipboard';
+import html2canvas from 'html2canvas';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useModalStore } from 'store/ModalStore';
 import { useSettingStore } from 'store/SettingStore';
+import { CAPTURE } from 'type/common';
 
 interface Props {
   onClickReset: () => void;
@@ -10,9 +13,33 @@ interface Props {
 
 function ConfigButtonSet({ onClickReset }: Props) {
   const { colorMap, history } = useColorMapStore((state) => state);
-  const { numOfBoxs } = useSettingStore((state) => state);
+  const { numOfBoxs, setIsShowConfig } = useSettingStore((state) => state);
   const { setModal } = useModalStore((state) => state);
   const disabled = history.length <= 1;
+
+  const hanldeClickSave = async () => {
+    setIsShowConfig(false);
+    const element = document.getElementById(CAPTURE);
+    if (element) {
+      try {
+        element.classList.add(styles[CAPTURE]);
+        const canvas = await html2canvas(element, { scale: 10, backgroundColor: null });
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'dotoori';
+        link.click();
+      } catch (error) {
+        setModal({
+          key: 'shareFail',
+          title: 'error',
+          desc: 'Sorry, saving failed due to an unknown reason.',
+          cancelBtn: { title: 'OK' },
+        });
+      } finally {
+        element.classList.remove(styles[CAPTURE]);
+      }
+    }
+  };
 
   const handleClickShare = async () => {
     const url = `${window.location.origin}/?box=${numOfBoxs}&shared=${encodeURIComponent(JSON.stringify(colorMap))}`;
@@ -41,7 +68,7 @@ function ConfigButtonSet({ onClickReset }: Props) {
     <ButtonGroup
       direction="column"
       buttons={[
-        { title: 'SAVE', disabled, onClick: () => onClickReset() },
+        { title: 'SAVE', disabled, onClick: () => hanldeClickSave() },
         { title: 'SHARE', disabled, onClick: () => handleClickShare() },
         { title: 'RESET', disabled, onClick: () => onClickReset() },
       ]}

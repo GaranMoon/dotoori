@@ -1,24 +1,28 @@
 .container {
-  &:not(.edit) {
-    width: 50px;
+  aspect-ratio: 1 / 1;
+  background-color: white;
+
+  * {
+    padding: 0;
+  }
+
+  .tableWrapper {
+    width: 100%;
     aspect-ratio: 1 / 1;
-    border: 1px solid black;
     position: relative;
 
     table {
       width: 100%;
       height: 100%;
-      aspect-ratio: 1 / 1;
       border-spacing: 0;
       border-collapse: collapse;
-      background-color: white;
       table-layout: fixed;
-
-      td {
-        padding: 0;
-        background-color: white;
-      }
     }
+  }
+
+  &.preview {
+    width: 50px;
+    border: 1px solid black;
 
     &.collapse {
       width: 40px;
@@ -27,17 +31,20 @@
 
   &.edit {
     width: 100%;
-    height: 100%;
 
-    table {
-      width: 100%;
-      height: 100%;
-      border-spacing: 0;
-      border-collapse: collapse;
+    .tableWrapper {
+      table {
+        td {
+          border: 1px solid black;
+        }
+      }
 
-      td {
-        border: 1px solid black;
-        background-color: white;
+      &.capture {
+        table {
+          td {
+            border: none;
+          }
+        }
       }
     }
   }

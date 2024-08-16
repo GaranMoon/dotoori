@@ -9,7 +9,14 @@ function DrawingBoard() {
 
   return (
     <div className={styles.container}>
-      <Frame width={10}>{!isShowConfig ? <GridEditor /> : <ConfigPanel />}</Frame>
+      <Frame width={10}>
+        <GridEditor />
+        {isShowConfig && (
+          <div className={styles.config}>
+            <ConfigPanel />
+          </div>
+        )}
+      </Frame>
     </div>
   );
 }

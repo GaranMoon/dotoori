@@ -3,4 +3,12 @@
   width: 500px;
   max-width: calc(100vw - 40px);
   aspect-ratio: 1 / 1;
+
+  .config {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: lightgray;
+  }
 }
