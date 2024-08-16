@@ -1,5 +1,7 @@
 import { Color } from 'type/common';
 
+export const boxOption: number[] = [10, 15, 20, 25, 30];
+
 export const colorData: Color = {
   IndianRed: '#CD5C5C',
   LightCoral: '#F08080',

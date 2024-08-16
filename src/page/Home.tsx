@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
 import { Modal } from 'component/atom';
-import { boxOptions } from 'component/organism/BoxRadioSet';
 import { BottomArea, MiddleArea, TopArea } from 'component/template';
+import { boxOption } from 'data/palette';
 import LZString from 'lz-string';
 import { useSearchParams } from 'react-router-dom';
 import { useColorMapStore } from 'store/ColorMapStore';
@@ -34,7 +34,7 @@ function Home() {
           setColorMap(map);
           addHistory(map);
           const numOfBoxs = Number(box);
-          setNumOfBoxs(boxOptions.includes(numOfBoxs) ? numOfBoxs : boxOptions[1]);
+          setNumOfBoxs(boxOption.includes(numOfBoxs) ? numOfBoxs : boxOption[1]);
           searchParams.delete('shared');
           searchParams.delete('box');
           setSearchParams(searchParams);
