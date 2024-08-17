@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { getClass } from 'util/common';
 
 import { Button, ButtonProps, ColorChip, Eraser, Grid } from 'component/atom';
@@ -20,26 +18,6 @@ function IndicatorPanel() {
   const { tool, picker, setTool } = useToolStore((state) => state);
   const { history, historyIndex } = useColorMapStore((state) => state);
   const squareSize = layoutMode === LayoutMode.COLLAPSE ? 'md' : 'lg';
-
-  useEffect(() => {
-    const handleKeyDown = (event: WindowEventMap['keydown']) => {
-      if (history.length <= 1) return;
-      const { key, ctrlKey, metaKey, shiftKey } = event;
-      const isCtrlCmd = ctrlKey || metaKey;
-      if (isCtrlCmd && key === 'z' && !shiftKey) {
-        event.preventDefault();
-        undo();
-        return;
-      }
-      if (isCtrlCmd && ((key === 'z' && shiftKey) || key === 'y')) {
-        event.preventDefault();
-        redo();
-        return;
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [historyIndex]);
 
   const handleEraser = (isActivate: boolean) => {
     if (!picker) return;

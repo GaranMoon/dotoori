@@ -4,12 +4,14 @@ import { Modal } from 'component/atom';
 import { BottomArea, MiddleArea, TopArea } from 'component/template';
 import { useLoad } from 'hook/useLoad';
 import { useMapHistory } from 'hook/useMapHistory';
+import useShortcut from 'hook/useShortcut';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useToolStore } from 'store/ToolStore';
 
 import styles from './Home.module.scss';
 
 function Home() {
+  useShortcut();
   const { load } = useLoad();
   const { addHistory } = useMapHistory();
   const { isOn, setIsOn } = useToolStore((state) => state);
