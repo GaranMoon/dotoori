@@ -18,6 +18,15 @@
   }
 
   &.md {
+    width: 45px;
+    height: 45px;
+
+    svg {
+      font-size: 30px;
+    }
+  }
+
+  &.lg {
     padding-top: 1px;
     width: 80px;
     height: 38px;
@@ -42,6 +51,11 @@
     }
 
     &.md {
+      padding-top: 1px;
+      height: 44px;
+    }
+
+    &.lg {
       padding-top: 2px;
       height: 37px;
     }

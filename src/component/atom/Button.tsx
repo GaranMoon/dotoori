@@ -6,12 +6,12 @@ import styles from './Button.module.scss';
 
 export interface ButtonProps {
   title: string | ReactNode;
-  size?: 'sm' | 'md';
+  size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   onClick?: () => void;
 }
 
-function Button({ title, size = 'md', disabled, onClick }: ButtonProps) {
+function Button({ title, size = 'lg', disabled, onClick }: ButtonProps) {
   return (
     <div
       className={getClass(['container', size, disabled ? 'disabled' : ''], styles)}
