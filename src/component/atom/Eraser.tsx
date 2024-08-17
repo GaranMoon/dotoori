@@ -1,12 +1,12 @@
 import { getClass } from 'util/common';
 
 import { useSettingStore } from 'store/SettingStore';
-import { Tool } from 'type/common';
+import { ToolStatus } from 'type/common';
 
 import styles from './Eraser.module.scss';
 
 interface Props {
-  highlight?: Tool;
+  highlight?: ToolStatus;
   onClick: () => void;
 }
 

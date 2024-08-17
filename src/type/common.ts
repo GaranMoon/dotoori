@@ -9,7 +9,7 @@ export enum LayoutMode {
 
 export type Color = { [key: string]: string };
 
-export enum Tool {
+export enum ToolStatus {
   PICKED = 'picked',
   USED = 'used',
 }

@@ -9,7 +9,7 @@ import { BiRedo } from 'react-icons/bi';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
-import { LayoutMode, Tool } from 'type/common';
+import { LayoutMode, ToolStatus } from 'type/common';
 
 import styles from './IndicatorPanel.module.scss';
 
@@ -17,8 +17,8 @@ function IndicatorPanel() {
   const { layoutMode } = useSettingStore((state) => state);
   const { picker, isEraser, setIsEraser } = useToolStore((state) => state);
   const { history, historyIndex, setColorMap, setHistoryIndex } = useColorMapStore((state) => state);
-  const isColorPicked = !!picker && !isEraser ? Tool.PICKED : undefined;
-  const isEraserPicked = isEraser ? Tool.PICKED : undefined;
+  const isColorPicked = !!picker && !isEraser ? ToolStatus.PICKED : undefined;
+  const isEraserPicked = isEraser ? ToolStatus.PICKED : undefined;
 
   useEffect(() => {
     const handleKeyDown = (event: WindowEventMap['keydown']) => {

@@ -1,13 +1,13 @@
 import { getClass } from 'util/common';
 
-import { Tool } from 'type/common';
+import { ToolStatus } from 'type/common';
 
 import styles from './ColorChip.module.scss';
 
 interface Props {
   size?: 'sm' | 'md' | 'lg';
   color: string;
-  highlight?: Tool;
+  highlight?: ToolStatus;
   onClick?: () => void;
 }
 

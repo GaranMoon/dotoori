@@ -1,7 +1,7 @@
 import { getClass } from 'util/common';
 
 import { ColorChip } from 'component/atom';
-import { Tool } from 'type/common';
+import { ToolStatus } from 'type/common';
 
 import styles from './Palette.module.scss';
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 function Palette({ color, text, picked, used }: Props) {
-  const highlight = picked ? Tool.PICKED : used ? Tool.USED : undefined;
+  const highlight = picked ? ToolStatus.PICKED : used ? ToolStatus.USED : undefined;
 
   return (
     <div className={styles.container}>
