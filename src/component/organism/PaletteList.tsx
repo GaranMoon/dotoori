@@ -4,10 +4,10 @@ import { cutWords } from 'util/common';
 
 import { Palette } from 'component/molecule';
 import { colorData } from 'data/palette';
+import { useLayout } from 'hook/useLayout';
 import { useColorMapStore } from 'store/ColorMapStore';
-import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
-import { COLLAPSE_MAX, LayoutMode, Tool, ToolStatus } from 'type/common';
+import { Tool, ToolStatus } from 'type/common';
 
 import styles from './PaletteList.module.scss';
 
@@ -15,30 +15,14 @@ type Color = [string, string];
 const colorList: Color[] = Object.entries(colorData);
 
 function PaletteList() {
+  const { screenWidth } = useLayout();
   const [splitList, setSplitList] = useState<Color[][]>([]);
   const [usedColors, setUsedColors] = useState<string[]>([]);
   const { tool, picker, isOn, setTool, setPicker } = useToolStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
-  const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-  const { layoutMode, setLayoutMode, setIsShowConfig } = useSettingStore((state) => state);
-  const isCollapseMode = layoutMode === LayoutMode.COLLAPSE;
-
-  useEffect(() => {
-    const handleResize = () => setScreenWidth(window.innerWidth);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     setSplitList(getSplitList(screenWidth));
-    if (screenWidth < COLLAPSE_MAX) {
-      if (!isCollapseMode) setLayoutMode(LayoutMode.COLLAPSE);
-      return;
-    }
-    if (isCollapseMode) {
-      setLayoutMode(LayoutMode.NONE);
-      setIsShowConfig(false);
-    }
   }, [screenWidth]);
 
   useEffect(() => {
