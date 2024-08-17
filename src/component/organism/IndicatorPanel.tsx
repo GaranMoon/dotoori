@@ -4,6 +4,7 @@ import { getClass } from 'util/common';
 
 import { Button, ButtonProps, ColorChip, Eraser, Grid } from 'component/atom';
 import { ButtonGroup } from 'component/molecule';
+import { useMapHistory } from 'hook/useMapHistory';
 import { BiUndo } from 'react-icons/bi';
 import { BiRedo } from 'react-icons/bi';
 import { useColorMapStore } from 'store/ColorMapStore';
@@ -14,9 +15,10 @@ import { LayoutMode, Tool, ToolStatus } from 'type/common';
 import styles from './IndicatorPanel.module.scss';
 
 function IndicatorPanel() {
+  const { undo, redo } = useMapHistory();
   const { layoutMode } = useSettingStore((state) => state);
   const { tool, picker, setTool } = useToolStore((state) => state);
-  const { history, historyIndex, setColorMap, setHistoryIndex } = useColorMapStore((state) => state);
+  const { history, historyIndex } = useColorMapStore((state) => state);
   const squareSize = layoutMode === LayoutMode.COLLAPSE ? 'md' : 'lg';
 
   useEffect(() => {
@@ -26,33 +28,18 @@ function IndicatorPanel() {
       const isCtrlCmd = ctrlKey || metaKey;
       if (isCtrlCmd && key === 'z' && !shiftKey) {
         event.preventDefault();
-        handleUndo();
+        undo();
         return;
       }
       if (isCtrlCmd && ((key === 'z' && shiftKey) || key === 'y')) {
         event.preventDefault();
-        handleRedo();
+        redo();
         return;
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [historyIndex]);
-
-  const handleUndo = () => {
-    if (historyIndex <= 0) return;
-    const newIndex = historyIndex - 1;
-    setColorMap({ ...history[newIndex] });
-    setHistoryIndex(newIndex);
-  };
-
-  const handleRedo = () => {
-    const lastIndex = history.length - 1;
-    if (historyIndex >= lastIndex) return;
-    const newIndex = historyIndex + 1;
-    setColorMap({ ...history[newIndex] });
-    setHistoryIndex(newIndex);
-  };
 
   const handleEraser = (isActivate: boolean) => {
     if (!picker) return;
@@ -61,8 +48,8 @@ function IndicatorPanel() {
 
   const getButtonProps = (direction?: 'undo' | 'redo'): ButtonProps => {
     return direction === 'undo'
-      ? { title: <BiUndo />, size: 'sm', disabled: !historyIndex, onClick: handleUndo }
-      : { title: <BiRedo />, size: 'sm', disabled: historyIndex === history.length - 1, onClick: handleRedo };
+      ? { title: <BiUndo />, size: 'sm', disabled: !historyIndex, onClick: undo }
+      : { title: <BiRedo />, size: 'sm', disabled: historyIndex === history.length - 1, onClick: redo };
   };
 
   const renderGrid = () => {

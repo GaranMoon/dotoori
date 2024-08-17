@@ -3,22 +3,21 @@ import { useEffect } from 'react';
 import { Modal } from 'component/atom';
 import { BottomArea, MiddleArea, TopArea } from 'component/template';
 import { boxOption } from 'data/palette';
+import { useMapHistory } from 'hook/useMapHistory';
 import LZString from 'lz-string';
 import { useSearchParams } from 'react-router-dom';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
-import { Color } from 'type/common';
 
 import styles from './Home.module.scss';
 
 function Home() {
+  const { addHistory } = useMapHistory();
   const [searchParams, setSearchParams] = useSearchParams();
   const { setNumOfBoxs } = useSettingStore((state) => state);
   const { isOn, setIsOn } = useToolStore((state) => state);
-  const { colorMap, history, historyIndex, setColorMap, setHistory, setHistoryIndex } = useColorMapStore(
-    (state) => state,
-  );
+  const { colorMap, setColorMap } = useColorMapStore((state) => state);
 
   useEffect(() => {
     loadSharedMap();
@@ -52,18 +51,6 @@ function Home() {
       setIsOn(false);
       addHistory(colorMap);
     }
-  };
-
-  const addHistory = (colorMap: Color) => {
-    let newHistory: Color[] = [...history];
-    const newIndex = historyIndex + 1;
-    const lastIndex = newHistory.length - 1;
-    if (newIndex <= lastIndex) {
-      newHistory = newHistory.slice(0, newIndex);
-    }
-    newHistory.push({ ...colorMap });
-    setHistory(newHistory);
-    setHistoryIndex(newIndex);
   };
 
   return (
