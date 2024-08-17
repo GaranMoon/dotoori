@@ -3,6 +3,7 @@ import { getClass } from 'util/common';
 import { Button, ButtonProps, ColorChip, Eraser, Grid } from 'component/atom';
 import { ButtonGroup } from 'component/molecule';
 import { useMapHistory } from 'hook/useMapHistory';
+import { useTool } from 'hook/useTool';
 import { BiUndo } from 'react-icons/bi';
 import { BiRedo } from 'react-icons/bi';
 import { useColorMapStore } from 'store/ColorMapStore';
@@ -14,15 +15,11 @@ import styles from './IndicatorPanel.module.scss';
 
 function IndicatorPanel() {
   const { undo, redo } = useMapHistory();
+  const { pickTool } = useTool();
   const { layoutMode } = useSettingStore((state) => state);
-  const { tool, picker, setTool } = useToolStore((state) => state);
+  const { tool, picker } = useToolStore((state) => state);
   const { history, historyIndex } = useColorMapStore((state) => state);
   const squareSize = layoutMode === LayoutMode.COLLAPSE ? 'md' : 'lg';
-
-  const handleEraser = (isActivate: boolean) => {
-    if (!picker) return;
-    setTool(isActivate ? Tool.ERASER : Tool.BRUSH);
-  };
 
   const getButtonProps = (direction?: 'undo' | 'redo'): ButtonProps => {
     return direction === 'undo'
@@ -45,7 +42,7 @@ function IndicatorPanel() {
           size={squareSize}
           color={picker}
           status={tool === Tool.BRUSH ? ToolStatus.PICKED : undefined}
-          onClick={() => handleEraser(false)}
+          onClick={() => pickTool(Tool.BRUSH)}
         />
       </div>
     );
@@ -57,7 +54,7 @@ function IndicatorPanel() {
         <Eraser
           size={squareSize}
           status={tool === Tool.ERASER ? ToolStatus.PICKED : undefined}
-          onClick={() => handleEraser(true)}
+          onClick={() => pickTool(Tool.ERASER)}
         />
       </div>
     );

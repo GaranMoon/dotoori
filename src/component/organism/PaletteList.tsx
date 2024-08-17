@@ -5,6 +5,7 @@ import { cutWords } from 'util/common';
 import { Palette } from 'component/molecule';
 import { colorData } from 'data/palette';
 import { useLayout } from 'hook/useLayout';
+import { useTool } from 'hook/useTool';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useToolStore } from 'store/ToolStore';
 import { Tool, ToolStatus } from 'type/common';
@@ -15,10 +16,11 @@ type Color = [string, string];
 const colorList: Color[] = Object.entries(colorData);
 
 function PaletteList() {
+  const { pickTool } = useTool();
   const { screenWidth } = useLayout();
   const [splitList, setSplitList] = useState<Color[][]>([]);
   const [usedColors, setUsedColors] = useState<string[]>([]);
-  const { tool, picker, isOn, setTool, setPicker } = useToolStore((state) => state);
+  const { tool, picker, isOn } = useToolStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
 
   useEffect(() => {
@@ -28,11 +30,6 @@ function PaletteList() {
   useEffect(() => {
     if (!isOn) setUsedColors(Object.values(colorMap));
   }, [colorMap, isOn]);
-
-  const handlePickColor = (color: string) => {
-    setTool(Tool.BRUSH);
-    setPicker(color);
-  };
 
   return (
     <div className={styles.container}>
@@ -47,7 +44,7 @@ function PaletteList() {
                   ? ToolStatus.USED
                   : undefined;
             return (
-              <div key={__i} onClick={() => handlePickColor(color)}>
+              <div key={__i} onClick={() => pickTool(Tool.BRUSH, color)}>
                 <Palette color={color} text={cutWords(text)} status={status} />
               </div>
             );
