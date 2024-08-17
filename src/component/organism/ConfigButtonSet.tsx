@@ -49,7 +49,7 @@ function ConfigButtonSet({ onClickReset }: Props) {
       try {
         await navigator.share({ title: document.title, url });
       } catch (error) {
-        copyToClipboard(url);
+        console.log(`share canceled: ${error}`);
       }
       return;
     }
