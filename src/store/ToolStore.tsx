@@ -1,19 +1,20 @@
+import { Tool } from 'type/common';
 import { create } from 'zustand';
 
 interface Props {
+  tool: Tool | null;
   picker: string;
-  isEraser: boolean;
-  isDrawing: boolean;
+  isOn: boolean;
+  setTool: (e: Tool | null) => void;
   setPicker: (e: string) => void;
-  setIsEraser: (e: boolean) => void;
-  setIsDrawing: (e: boolean) => void;
+  setIsOn: (e: boolean) => void;
 }
 
 export const useToolStore = create<Props>((set) => ({
+  tool: null,
   picker: '',
-  isEraser: false,
-  isDrawing: false,
+  isOn: false,
+  setTool: (tool) => set(() => ({ tool })),
   setPicker: (picker) => set(() => ({ picker })),
-  setIsEraser: (isEraser) => set(() => ({ isEraser })),
-  setIsDrawing: (isDrawing) => set(() => ({ isDrawing })),
+  setIsOn: (isOn) => set(() => ({ isOn })),
 }));

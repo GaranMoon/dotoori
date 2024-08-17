@@ -13,12 +13,12 @@ interface Props {
 }
 
 function Palette({ color, text, picked, used }: Props) {
-  const highlight = picked ? ToolStatus.PICKED : used ? ToolStatus.USED : undefined;
+  const status = picked ? ToolStatus.PICKED : used ? ToolStatus.USED : undefined;
 
   return (
     <div className={styles.container}>
-      <ColorChip color={color} highlight={highlight} />
-      <div className={getClass(['text', highlight], styles)}>{text}</div>
+      <ColorChip color={color} status={status} />
+      <div className={getClass(['text', status], styles)}>{text}</div>
     </div>
   );
 }

@@ -15,7 +15,7 @@ import styles from './Home.module.scss';
 function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { setNumOfBoxs } = useSettingStore((state) => state);
-  const { isDrawing, setIsDrawing } = useToolStore((state) => state);
+  const { isOn, setIsOn } = useToolStore((state) => state);
   const { colorMap, history, historyIndex, setColorMap, setHistory, setHistoryIndex } = useColorMapStore(
     (state) => state,
   );
@@ -48,8 +48,8 @@ function Home() {
   };
 
   const handleMouseUp = () => {
-    if (isDrawing) {
-      setIsDrawing(false);
+    if (isOn) {
+      setIsOn(false);
       addHistory(colorMap);
     }
   };

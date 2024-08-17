@@ -9,16 +9,14 @@ import { BiRedo } from 'react-icons/bi';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
-import { LayoutMode, ToolStatus } from 'type/common';
+import { LayoutMode, Tool, ToolStatus } from 'type/common';
 
 import styles from './IndicatorPanel.module.scss';
 
 function IndicatorPanel() {
   const { layoutMode } = useSettingStore((state) => state);
-  const { picker, isEraser, setIsEraser } = useToolStore((state) => state);
+  const { tool, picker, setTool } = useToolStore((state) => state);
   const { history, historyIndex, setColorMap, setHistoryIndex } = useColorMapStore((state) => state);
-  const isColorPicked = !!picker && !isEraser ? ToolStatus.PICKED : undefined;
-  const isEraserPicked = isEraser ? ToolStatus.PICKED : undefined;
 
   useEffect(() => {
     const handleKeyDown = (event: WindowEventMap['keydown']) => {
@@ -57,7 +55,7 @@ function IndicatorPanel() {
 
   const handleEraser = (isActivate: boolean) => {
     if (!picker) return;
-    setIsEraser(isActivate);
+    setTool(isActivate ? Tool.ERASER : Tool.BRUSH);
   };
 
   const getButtonProps = (direction?: 'undo' | 'redo'): ButtonProps => {
@@ -77,7 +75,12 @@ function IndicatorPanel() {
   const renderColorChop = (size: 'md' | 'lg') => {
     return (
       <div className={styles.square}>
-        <ColorChip size={size} color={picker} highlight={isColorPicked} onClick={() => handleEraser(false)} />
+        <ColorChip
+          size={size}
+          color={picker}
+          status={tool === Tool.BRUSH ? ToolStatus.PICKED : undefined}
+          onClick={() => handleEraser(false)}
+        />
       </div>
     );
   };
@@ -85,7 +88,10 @@ function IndicatorPanel() {
   const renderEraser = () => {
     return (
       <div className={styles.square}>
-        <Eraser highlight={isEraserPicked} onClick={() => handleEraser(true)} />
+        <Eraser
+          status={tool === Tool.ERASER ? ToolStatus.PICKED : undefined}
+          onClick={() => handleEraser(true)}
+        />
       </div>
     );
   };

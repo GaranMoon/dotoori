@@ -6,15 +6,15 @@ import { ToolStatus } from 'type/common';
 import styles from './Eraser.module.scss';
 
 interface Props {
-  highlight?: ToolStatus;
+  status?: ToolStatus;
   onClick: () => void;
 }
 
-function Eraser({ highlight, onClick }: Props) {
+function Eraser({ status, onClick }: Props) {
   const { layoutMode } = useSettingStore((state) => state);
 
   return (
-    <div className={getClass(['container', layoutMode, highlight], styles)} onClick={onClick}>
+    <div className={getClass(['container', layoutMode, status], styles)} onClick={onClick}>
       <div className={styles.line} />
       <div className={getClass(['line', 'reverse'], styles)} />
     </div>

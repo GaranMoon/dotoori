@@ -7,7 +7,7 @@ import { colorData } from 'data/palette';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
-import { COLLAPSE_MAX, LayoutMode } from 'type/common';
+import { COLLAPSE_MAX, LayoutMode, Tool } from 'type/common';
 
 import styles from './PaletteList.module.scss';
 
@@ -17,7 +17,7 @@ const colorList: Color[] = Object.entries(colorData);
 function PaletteList() {
   const [splitList, setSplitList] = useState<Color[][]>([]);
   const [usedColors, setUsedColors] = useState<string[]>([]);
-  const { picker, isEraser, isDrawing, setPicker, setIsEraser } = useToolStore((state) => state);
+  const { tool, picker, isOn, setTool, setPicker } = useToolStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
   const { layoutMode, setLayoutMode, setIsShowConfig } = useSettingStore((state) => state);
@@ -42,11 +42,11 @@ function PaletteList() {
   }, [screenWidth]);
 
   useEffect(() => {
-    if (!isDrawing) setUsedColors(Object.values(colorMap));
-  }, [colorMap, isDrawing]);
+    if (!isOn) setUsedColors(Object.values(colorMap));
+  }, [colorMap, isOn]);
 
   const handlePickColor = (color: string) => {
-    if (isEraser) setIsEraser(false);
+    setTool(Tool.BRUSH);
     setPicker(color);
   };
 
@@ -56,7 +56,7 @@ function PaletteList() {
         <div key={_i} className={styles.column}>
           {_.map((__, __i) => {
             const [text, color] = __;
-            const picked = !isEraser && color === picker;
+            const picked = tool === Tool.BRUSH && color === picker;
             const used = usedColors.includes(color);
             return (
               <div key={__i} onClick={() => handlePickColor(color)}>

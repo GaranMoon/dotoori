@@ -7,14 +7,14 @@ import styles from './ColorChip.module.scss';
 interface Props {
   size?: 'sm' | 'md' | 'lg';
   color: string;
-  highlight?: ToolStatus;
+  status?: ToolStatus;
   onClick?: () => void;
 }
 
-function ColorChip({ size = 'sm', color, highlight, onClick }: Props) {
+function ColorChip({ size = 'sm', color, status, onClick }: Props) {
   return (
     <div
-      className={getClass(['container', size, highlight], styles)}
+      className={getClass(['container', size, status], styles)}
       style={{ backgroundColor: color }}
       onClick={onClick}
     />

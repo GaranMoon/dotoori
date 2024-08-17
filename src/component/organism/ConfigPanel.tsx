@@ -9,7 +9,7 @@ import { useToolStore } from 'store/ToolStore';
 import styles from './ConfigPanel.module.scss';
 
 function ConfigPanel() {
-  const { setPicker, setIsEraser } = useToolStore((state) => state);
+  const { setTool, setPicker } = useToolStore((state) => state);
   const { history, setColorMap, setHistory, setHistoryIndex } = useColorMapStore((state) => state);
   const { layoutMode, setIsShowConfig, setNumOfBoxs } = useSettingStore((state) => state);
   const { setModal } = useModalStore((state) => state);
@@ -31,8 +31,8 @@ function ConfigPanel() {
 
   const handleReset = (numOfBoxs?: number) => {
     setColorMap({});
+    setTool(null);
     setPicker('');
-    setIsEraser(false);
     setHistory([{}]);
     setHistoryIndex(0);
     setIsShowConfig(false);

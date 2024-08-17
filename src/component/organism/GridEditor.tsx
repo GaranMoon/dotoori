@@ -1,15 +1,16 @@
 import { Grid } from 'component/atom';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useToolStore } from 'store/ToolStore';
+import { Tool } from 'type/common';
 
 function GridEditor() {
-  const { picker, isEraser, isDrawing, setIsDrawing } = useToolStore((state) => state);
+  const { tool, picker, isOn, setIsOn } = useToolStore((state) => state);
   const { colorMap, setColorMap } = useColorMapStore((state) => state);
 
   const handleDraw = (key: string, isStart?: boolean) => {
-    if (!picker || (!isStart && !isDrawing)) return;
-    if (!isDrawing) setIsDrawing(true);
-    if (isEraser) {
+    if (!tool || (!isStart && !isOn)) return;
+    if (!isOn) setIsOn(true);
+    if (tool === Tool.ERASER) {
       delete colorMap[key];
       setColorMap(colorMap);
       return;
