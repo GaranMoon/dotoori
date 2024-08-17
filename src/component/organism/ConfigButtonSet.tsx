@@ -1,6 +1,7 @@
 import styles from 'component/atom/Grid.module.scss';
 import { ButtonGroup } from 'component/molecule';
 import copy from 'copy-to-clipboard';
+import { useReset } from 'hook/useReset';
 import html2canvas from 'html2canvas';
 import LZString from 'lz-string';
 import { useColorMapStore } from 'store/ColorMapStore';
@@ -8,11 +9,8 @@ import { useModalStore } from 'store/ModalStore';
 import { useSettingStore } from 'store/SettingStore';
 import { CAPTURE } from 'type/common';
 
-interface Props {
-  onClickReset: () => void;
-}
-
-function ConfigButtonSet({ onClickReset }: Props) {
+function ConfigButtonSet() {
+  const { confirmReset } = useReset();
   const { colorMap, history } = useColorMapStore((state) => state);
   const { numOfBoxs, setIsShowConfig } = useSettingStore((state) => state);
   const { setModal } = useModalStore((state) => state);
@@ -72,7 +70,7 @@ function ConfigButtonSet({ onClickReset }: Props) {
       buttons={[
         { title: 'SAVE', disabled, onClick: () => hanldeClickSave() },
         { title: 'SHARE', disabled, onClick: () => handleClickShare() },
-        { title: 'RESET', disabled, onClick: () => onClickReset() },
+        { title: 'RESET', disabled, onClick: () => confirmReset() },
       ]}
     />
   );
