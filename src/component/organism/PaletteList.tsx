@@ -20,16 +20,16 @@ function PaletteList() {
   const { screenWidth } = useLayout();
   const [splitList, setSplitList] = useState<Color[][]>([]);
   const [usedColors, setUsedColors] = useState<string[]>([]);
-  const { tool, picker, isOn } = useToolStore((state) => state);
-  const { colorMap } = useColorMapStore((state) => state);
+  const { tool, picker } = useToolStore((state) => state);
+  const { colorMap, historyIndex } = useColorMapStore((state) => state);
 
   useEffect(() => {
     setSplitList(getSplitList(screenWidth));
   }, [screenWidth]);
 
   useEffect(() => {
-    if (!isOn) setUsedColors(Object.values(colorMap));
-  }, [colorMap, isOn]);
+    setUsedColors(Object.values(colorMap));
+  }, [historyIndex]);
 
   return (
     <div className={styles.container}>
