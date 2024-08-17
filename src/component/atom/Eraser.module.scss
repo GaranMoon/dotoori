@@ -1,7 +1,6 @@
 @use 'style' as *;
 
 .container {
-  width: 50px;
   aspect-ratio: 1 / 1;
   background-color: white;
   border: 1px solid black;
@@ -14,8 +13,6 @@
 
   .line {
     position: absolute;
-    top: 24.5px;
-    left: -25px;
     width: 100px;
     height: 1px;
     background-color: black;
@@ -26,12 +23,21 @@
     }
   }
 
-  &.collapse {
+  &.md {
     width: 40px;
 
     .line {
       top: 19.5px;
       left: -30px;
+    }
+  }
+
+  &.lg {
+    width: 50px;
+
+    .line {
+      top: 24.5px;
+      left: -25px;
     }
   }
 }

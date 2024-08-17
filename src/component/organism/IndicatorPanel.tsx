@@ -17,6 +17,7 @@ function IndicatorPanel() {
   const { layoutMode } = useSettingStore((state) => state);
   const { tool, picker, setTool } = useToolStore((state) => state);
   const { history, historyIndex, setColorMap, setHistoryIndex } = useColorMapStore((state) => state);
+  const squareSize = layoutMode === LayoutMode.COLLAPSE ? 'md' : 'lg';
 
   useEffect(() => {
     const handleKeyDown = (event: WindowEventMap['keydown']) => {
@@ -72,11 +73,11 @@ function IndicatorPanel() {
     );
   };
 
-  const renderColorChop = (size: 'md' | 'lg') => {
+  const renderColorChop = () => {
     return (
       <div className={styles.square}>
         <ColorChip
-          size={size}
+          size={squareSize}
           color={picker}
           status={tool === Tool.BRUSH ? ToolStatus.PICKED : undefined}
           onClick={() => handleEraser(false)}
@@ -89,6 +90,7 @@ function IndicatorPanel() {
     return (
       <div className={styles.square}>
         <Eraser
+          size={squareSize}
           status={tool === Tool.ERASER ? ToolStatus.PICKED : undefined}
           onClick={() => handleEraser(true)}
         />
@@ -99,14 +101,14 @@ function IndicatorPanel() {
   return layoutMode !== LayoutMode.COLLAPSE ? (
     <div className={styles.container}>
       {renderGrid()}
-      {renderColorChop('lg')}
+      {renderColorChop()}
       {renderEraser()}
       <ButtonGroup buttons={[getButtonProps('undo'), getButtonProps('redo')]} />
     </div>
   ) : (
     <div className={getClass(['container', layoutMode], styles)}>
       <Button {...getButtonProps('undo')} />
-      {renderColorChop('md')}
+      {renderColorChop()}
       {renderGrid()}
       {renderEraser()}
       <Button {...getButtonProps('redo')} />

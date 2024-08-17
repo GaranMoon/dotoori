@@ -7,7 +7,7 @@ import { colorData } from 'data/palette';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
-import { COLLAPSE_MAX, LayoutMode, Tool } from 'type/common';
+import { COLLAPSE_MAX, LayoutMode, Tool, ToolStatus } from 'type/common';
 
 import styles from './PaletteList.module.scss';
 
@@ -56,11 +56,15 @@ function PaletteList() {
         <div key={_i} className={styles.column}>
           {_.map((__, __i) => {
             const [text, color] = __;
-            const picked = tool === Tool.BRUSH && color === picker;
-            const used = usedColors.includes(color);
+            const status =
+              tool === Tool.BRUSH && color === picker
+                ? ToolStatus.PICKED
+                : usedColors.includes(color)
+                  ? ToolStatus.USED
+                  : undefined;
             return (
               <div key={__i} onClick={() => handlePickColor(color)}>
-                <Palette color={color} text={cutWords(text)} picked={picked} used={used} />
+                <Palette color={color} text={cutWords(text)} status={status} />
               </div>
             );
           })}

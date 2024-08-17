@@ -1,20 +1,18 @@
 import { getClass } from 'util/common';
 
-import { useSettingStore } from 'store/SettingStore';
 import { ToolStatus } from 'type/common';
 
 import styles from './Eraser.module.scss';
 
 interface Props {
+  size?: 'md' | 'lg';
   status?: ToolStatus;
   onClick: () => void;
 }
 
-function Eraser({ status, onClick }: Props) {
-  const { layoutMode } = useSettingStore((state) => state);
-
+function Eraser({ size = 'lg', status, onClick }: Props) {
   return (
-    <div className={getClass(['container', layoutMode, status], styles)} onClick={onClick}>
+    <div className={getClass(['container', size, status], styles)} onClick={onClick}>
       <div className={styles.line} />
       <div className={getClass(['line', 'reverse'], styles)} />
     </div>

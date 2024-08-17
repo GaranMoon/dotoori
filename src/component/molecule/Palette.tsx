@@ -8,13 +8,10 @@ import styles from './Palette.module.scss';
 interface Props {
   color: string;
   text: string;
-  picked: boolean;
-  used: boolean;
+  status?: ToolStatus;
 }
 
-function Palette({ color, text, picked, used }: Props) {
-  const status = picked ? ToolStatus.PICKED : used ? ToolStatus.USED : undefined;
-
+function Palette({ color, text, status }: Props) {
   return (
     <div className={styles.container}>
       <ColorChip color={color} status={status} />
