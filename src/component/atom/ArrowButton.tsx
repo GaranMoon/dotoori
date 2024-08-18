@@ -4,12 +4,13 @@ import { getClass } from 'util/common';
 
 import { FaChevronLeft } from 'react-icons/fa6';
 import { useSettingStore } from 'store/SettingStore';
+import { Direction } from 'type/common';
 
 import styles from './ArrowButton.module.scss';
 
 interface Props {
   size?: 'sm' | 'lg';
-  direction: 'up' | 'down' | 'left' | 'right' | 'center';
+  direction: Direction;
   icon?: ReactNode;
   onClick: () => void;
 }

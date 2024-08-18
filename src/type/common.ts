@@ -9,6 +9,8 @@ export enum LayoutMode {
 
 export type Color = { [key: string]: string };
 
+export type Direction = 'up' | 'down' | 'left' | 'right' | 'center';
+
 export enum Tool {
   BRUSH = 'brush',
   ERASER = 'eraser',
