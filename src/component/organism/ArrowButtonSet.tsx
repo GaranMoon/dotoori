@@ -6,9 +6,11 @@ import { RiCheckboxBlankCircleLine } from 'react-icons/ri';
 import { RiCheckboxBlankCircleFill } from 'react-icons/ri';
 import { RxTriangleLeft } from 'react-icons/rx';
 import { useSettingStore } from 'store/SettingStore';
-import { BackgroundColor, LayoutMode } from 'type/common';
+import { BackgroundColor, Direction, LayoutMode } from 'type/common';
 
 import styles from './ArrowButtonSet.module.scss';
+
+const directions: Direction[] = ['up', 'left', 'right', 'down'];
 
 interface Props {
   size?: 'sm' | 'lg';
@@ -16,7 +18,7 @@ interface Props {
 
 function ArrowButtonSet({ size = 'lg' }: Props) {
   const { layoutMode, backgroundColor } = useSettingStore((state) => state);
-  const { switchBackgroundColor } = useTool();
+  const { switchBackgroundColor, moveDrawing } = useTool();
   const isCollapseMode = layoutMode === LayoutMode.COLLAPSE;
   const arrowIcon = isCollapseMode ? <RxTriangleLeft /> : undefined;
   const centerIcon =
@@ -27,10 +29,9 @@ function ArrowButtonSet({ size = 'lg' }: Props) {
       {!isCollapseMode && (
         <ArrowButton size={size} direction="center" icon={centerIcon} onClick={switchBackgroundColor} />
       )}
-      <ArrowButton size={size} icon={arrowIcon} direction="up" onClick={() => {}} />
-      <ArrowButton size={size} icon={arrowIcon} direction="left" onClick={() => {}} />
-      <ArrowButton size={size} icon={arrowIcon} direction="right" onClick={() => {}} />
-      <ArrowButton size={size} icon={arrowIcon} direction="down" onClick={() => {}} />
+      {directions.map((_, _i) => (
+        <ArrowButton key={_i} size={size} icon={arrowIcon} direction={_} onClick={() => moveDrawing(_)} />
+      ))}
     </div>
   );
 }

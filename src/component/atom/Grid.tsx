@@ -33,7 +33,7 @@ function Grid({ mode = 'preview', tdProps }: Props) {
             {[...Array(numOfBoxs)].map((_, _i) => (
               <tr key={_i}>
                 {[...Array(numOfBoxs)].map((__, __i) => {
-                  const key = getColorMapKey(_i, __i);
+                  const key = getColorMapKey(__i, _i);
                   return (
                     <td
                       key={__i}
