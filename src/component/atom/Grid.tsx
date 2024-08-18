@@ -1,9 +1,13 @@
+import { TdHTMLAttributes } from 'react';
+
 import { getClass, getColorMapKey } from 'util/common';
-import styles from './Grid.module.scss';
+
+import { useTool } from 'hook/useTool';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
-import { TdHTMLAttributes } from 'react';
-import { CAPTURE } from 'type/common';
+import { CAPTURE, LayoutMode } from 'type/common';
+
+import styles from './Grid.module.scss';
 
 interface Props {
   mode?: 'preview' | 'edit';
@@ -11,13 +15,19 @@ interface Props {
 }
 
 function Grid({ mode = 'preview', tdProps }: Props) {
-  const { layoutMode, numOfBoxs } = useSettingStore((state) => state);
+  const { layoutMode, numOfBoxs, backgroundColor } = useSettingStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
-  const captureId = mode === 'edit' ? CAPTURE : '';
+  const { switchBackgroundColor } = useTool();
+  const isEdit = mode === 'edit';
+
+  const handleClick = () => {
+    if (isEdit || layoutMode !== LayoutMode.COLLAPSE) return;
+    switchBackgroundColor();
+  };
 
   return (
-    <div className={getClass(['container', layoutMode, mode], styles)}>
-      <div id={captureId} className={styles.tableWrapper}>
+    <div className={getClass(['container', layoutMode, mode, backgroundColor], styles)} onClick={handleClick}>
+      <div id={isEdit ? CAPTURE : ''} className={styles.tableWrapper}>
         <table>
           <tbody>
             {[...Array(numOfBoxs)].map((_, _i) => (

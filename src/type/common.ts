@@ -18,3 +18,9 @@ export enum ToolStatus {
   PICKED = 'picked',
   USED = 'used',
 }
+
+export enum BackgroundColor {
+  WHITE = 'bgWhite',
+  BLACK = 'bgBlack',
+  TRANSPARENT = 'bgTransparent',
+}

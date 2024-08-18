@@ -1,6 +1,5 @@
 .container {
   aspect-ratio: 1 / 1;
-  background-color: white;
 
   * {
     padding: 0;
@@ -17,6 +16,28 @@
       border-spacing: 0;
       border-collapse: collapse;
       table-layout: fixed;
+    }
+  }
+
+  &.bgWhite {
+    .tableWrapper {
+      background-color: white;
+    }
+  }
+
+  &.bgBlack {
+    .tableWrapper {
+      background-color: black;
+    }
+
+    &.edit {
+      .tableWrapper {
+        table {
+          td {
+            border: 1px solid lightgray;
+          }
+        }
+      }
     }
   }
 
