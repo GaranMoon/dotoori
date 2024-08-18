@@ -1,3 +1,4 @@
+export { default as ArrowButton } from './ArrowButton';
 export { default as Button } from './Button';
 export type { ButtonProps } from './Button';
 export { default as ColorChip } from './ColorChip';
