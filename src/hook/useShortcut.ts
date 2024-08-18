@@ -1,11 +1,16 @@
 import { useEffect } from 'react';
 
 import { useColorMapStore } from 'store/ColorMapStore';
+import { useModalStore } from 'store/ModalStore';
+import { Tool } from 'type/common';
 
 import { useMapHistory } from './useMapHistory';
+import { useTool } from './useTool';
 
 export default function useShortcut() {
+  const { pickTool, moveDrawing } = useTool();
   const { undo, redo } = useMapHistory();
+  const { setModal } = useModalStore((state) => state);
   const { history, historyIndex } = useColorMapStore((state) => state);
 
   useEffect(() => {
@@ -19,28 +24,30 @@ export default function useShortcut() {
     const isEmptyHistory = history.length <= 1;
     switch (key) {
       case 'ArrowUp':
-        //.
-        console.log('ArrowUp');
+        event.preventDefault();
+        moveDrawing('up');
         break;
       case 'ArrowDown':
-        //.
-        console.log('ArrowDown');
+        event.preventDefault();
+        moveDrawing('down');
         break;
       case 'ArrowRight':
-        //.
-        console.log('ArrowRight');
+        event.preventDefault();
+        moveDrawing('right');
         break;
       case 'ArrowLeft':
-        //.
-        console.log('ArrowLeft');
+        event.preventDefault();
+        moveDrawing('left');
         break;
       case 'b':
-        //.
-        console.log('b');
+      case 'ㅠ':
+        event.preventDefault();
+        pickTool(Tool.BRUSH);
         break;
       case 'e':
-        //.
-        console.log('e');
+      case 'ㄷ':
+        event.preventDefault();
+        pickTool(Tool.ERASER);
         break;
       case 'y':
         if (isEmptyHistory || !isCommand) return;
@@ -53,8 +60,8 @@ export default function useShortcut() {
         shiftKey ? redo() : undo();
         break;
       case 'Escape':
-        //.
-        console.log('Escape');
+        event.preventDefault();
+        setModal(null);
         break;
       default:
     }
