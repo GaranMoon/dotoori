@@ -1,3 +1,4 @@
+import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
 import { BackgroundColor, Tool } from 'type/common';
@@ -5,11 +6,26 @@ import { BackgroundColor, Tool } from 'type/common';
 export function useTool() {
   const { picker, setTool, setPicker } = useToolStore((state) => state);
   const { backgroundColor, setBackgroundColor } = useSettingStore((state) => state);
+  const { colorMap } = useColorMapStore((state) => state);
 
   const pickTool = (tool: Tool | null, color?: string) => {
-    if (!picker && !color) return;
-    setTool(tool);
-    if (tool === Tool.BRUSH && color) setPicker(color);
+    switch (tool) {
+      case Tool.BRUSH:
+        if (picker || color) {
+          setTool(tool);
+          if (color) setPicker(color);
+          return;
+        }
+        break;
+      case Tool.ERASER:
+        if (picker || JSON.stringify(colorMap) !== '{}') {
+          setTool(tool);
+          return;
+        }
+        break;
+      default:
+        setTool(null);
+    }
   };
 
   const switchBackgroundColor = () => {
