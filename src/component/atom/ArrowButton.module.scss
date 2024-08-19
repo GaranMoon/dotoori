@@ -14,8 +14,7 @@
 
   &.up {
     top: 0;
-    border-top-left-radius: 20%;
-    border-top-right-radius: 20%;
+    border-radius: 20% 20% 0 0;
 
     .icon {
       margin-top: -7px;
@@ -25,8 +24,7 @@
 
   &.down {
     bottom: 0;
-    border-bottom-left-radius: 20%;
-    border-bottom-right-radius: 20%;
+    border-radius: 0 0 20% 20%;
 
     .icon {
       margin-bottom: -7px;
@@ -36,8 +34,7 @@
 
   &.left {
     left: 0;
-    border-top-left-radius: 20%;
-    border-bottom-left-radius: 20%;
+    border-radius: 20% 0 0 20%;
 
     .icon {
       margin-left: -7px;
@@ -46,8 +43,7 @@
 
   &.right {
     right: 0;
-    border-top-right-radius: 20%;
-    border-bottom-right-radius: 20%;
+    border-radius: 0 20% 20% 0;
 
     .icon {
       margin-right: -7px;
@@ -89,10 +85,8 @@
 
   &.lg {
     background-color: lightslategray;
-    border-top: 2px solid #8da0b4;
-    border-right: 2px solid #576878;
-    border-bottom: 2px solid #576878;
-    border-left: 2px solid #8da0b4;
+    border: 2px solid;
+    border-color: #8da0b4 #576878 #576878 #8da0b4;
 
     .icon {
       color: darkslategray;
@@ -100,10 +94,7 @@
 
     &:hover {
       background-color: rgb(98, 113, 129);
-      border-top: 2px solid #00000010;
-      border-right: 2px solid #ffffff20;
-      border-bottom: 2px solid #ffffff20;
-      border-left: 2px solid #00000010;
+      border-color: #00000010 #ffffff20 #ffffff20 #00000010;
 
       .icon,
       .bgTransparent {
@@ -114,6 +105,8 @@
 
   &.sm {
     z-index: 990;
+    font-size: 27px;
+    color: dimgray;
 
     &.up {
       margin-top: -9px;

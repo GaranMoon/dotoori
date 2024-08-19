@@ -7,10 +7,8 @@
   width: 300px;
   min-height: 150px;
   background-color: lightgray;
-  border-top: 2px solid darkgray;
-  border-right: 2px solid dimgray;
-  border-bottom: 2px solid dimgray;
-  border-left: 2px solid darkgray;
+  border: 2px solid;
+  border-color: darkgray dimgray dimgray darkgray;
 
   .title {
     display: flex;

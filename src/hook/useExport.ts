@@ -11,9 +11,7 @@ import { useSettingStore } from 'store/SettingStore';
 export function useExport() {
   const { setModal } = useModalStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
-  const { numOfBoxs, isShowConfig, isSaving, setIsShowConfig, setIsSaving } = useSettingStore(
-    (state) => state,
-  );
+  const { numOfBoxs, isSaving, setIsSaving } = useSettingStore((state) => state);
 
   useEffect(() => {
     if (isSaving) handleSave();
@@ -43,7 +41,6 @@ export function useExport() {
       console.log(`save failed: ${error}`);
     } finally {
       setIsSaving(false);
-      if (isShowConfig) setIsShowConfig(false);
     }
   };
 
