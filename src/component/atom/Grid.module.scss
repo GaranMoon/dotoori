@@ -32,7 +32,7 @@
 
     &.edit {
       td {
-        border: 1px solid lightgray;
+        border: 1px solid darkgray;
       }
     }
   }
@@ -43,6 +43,10 @@
 
     &.collapse {
       width: 40px;
+    }
+
+    table {
+      pointer-events: none;
     }
   }
 
