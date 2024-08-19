@@ -1,16 +1,18 @@
-import { TdHTMLAttributes } from 'react';
+import { TdHTMLAttributes, useMemo } from 'react';
 
 import { getClass, getColorMapKey } from 'util/common';
 
 import { useTool } from 'hook/useTool';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
-import { CAPTURE, LayoutMode } from 'type/common';
+import { LayoutMode, SAVE_MAX_SIZE } from 'type/common';
 
 import styles from './Grid.module.scss';
 
+export type GridType = 'preview' | 'edit' | 'capture';
+
 interface Props {
-  mode?: 'preview' | 'edit';
+  mode?: GridType;
   tdProps?: (e: string) => TdHTMLAttributes<HTMLTableCellElement>;
 }
 
@@ -18,16 +20,19 @@ function Grid({ mode = 'preview', tdProps }: Props) {
   const { layoutMode, numOfBoxs, backgroundColor } = useSettingStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
   const { switchBackgroundColor } = useTool();
-  const isEdit = mode === 'edit';
+
+  const captureWidth = useMemo(() => {
+    return mode === 'capture' ? numOfBoxs * Math.floor(SAVE_MAX_SIZE / numOfBoxs) : '';
+  }, [numOfBoxs]);
 
   const handleClick = () => {
-    if (isEdit || layoutMode !== LayoutMode.COLLAPSE) return;
+    if (mode === 'edit' || layoutMode !== LayoutMode.COLLAPSE) return;
     switchBackgroundColor();
   };
 
   return (
     <div className={getClass(['container', layoutMode, mode, backgroundColor], styles)} onClick={handleClick}>
-      <div id={isEdit ? CAPTURE : ''} className={styles.tableWrapper}>
+      <div id={mode} className={styles.tableWrapper} style={{ width: captureWidth }}>
         <table>
           <tbody>
             {[...Array(numOfBoxs)].map((_, _i) => (

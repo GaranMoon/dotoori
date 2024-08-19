@@ -6,6 +6,7 @@ export { default as Copyright } from './Copyright';
 export { default as Eraser } from './Eraser';
 export { default as Frame } from './Frame';
 export { default as Grid } from './Grid';
+export type { GridType } from './Grid';
 export { default as Modal } from './Modal';
 export { default as ModalTemplate } from './ModalTemplate';
 export type { ModalProps } from './Modal';

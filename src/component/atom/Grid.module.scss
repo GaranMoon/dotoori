@@ -31,12 +31,8 @@
     }
 
     &.edit {
-      .tableWrapper {
-        table {
-          td {
-            border: 1px solid lightgray;
-          }
-        }
+      td {
+        border: 1px solid lightgray;
       }
     }
   }
@@ -53,20 +49,14 @@
   &.edit {
     width: 100%;
 
-    .tableWrapper {
-      table {
-        td {
-          border: 1px solid black;
-        }
-      }
+    td {
+      border: 1px solid black;
+    }
+  }
 
-      &.capture {
-        table {
-          td {
-            border: none;
-          }
-        }
-      }
+  &.capture {
+    td {
+      border: none;
     }
   }
 }

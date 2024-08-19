@@ -1,39 +1,49 @@
-import styles from 'component/atom/Grid.module.scss';
+import { useEffect } from 'react';
+
+import { GridType } from 'component/atom';
 import copy from 'copy-to-clipboard';
 import html2canvas from 'html2canvas';
 import LZString from 'lz-string';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useModalStore } from 'store/ModalStore';
 import { useSettingStore } from 'store/SettingStore';
-import { CAPTURE } from 'type/common';
 
 export function useExport() {
-  const { colorMap } = useColorMapStore((state) => state);
-  const { numOfBoxs, isShowConfig, setIsShowConfig } = useSettingStore((state) => state);
   const { setModal } = useModalStore((state) => state);
+  const { colorMap } = useColorMapStore((state) => state);
+  const { numOfBoxs, isShowConfig, isSaving, setIsShowConfig, setIsSaving } = useSettingStore(
+    (state) => state,
+  );
 
-  const save = async () => {
-    if (isShowConfig) setIsShowConfig(false);
-    const element = document.getElementById(CAPTURE);
-    if (element) {
-      try {
-        element.classList.add(styles[CAPTURE]);
-        const canvas = await html2canvas(element, { scale: 10, backgroundColor: null });
-        const link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = 'dotoori';
-        link.click();
-      } catch (error) {
-        setModal({
-          key: 'saveFail',
-          title: 'error',
-          desc: 'Sorry, saving failed due to an unknown reason.',
-          cancelBtn: { title: 'OK' },
-        });
-        console.log(`save failed: ${error}`);
-      } finally {
-        element.classList.remove(styles[CAPTURE]);
-      }
+  useEffect(() => {
+    if (isSaving) handleSave();
+  }, [isSaving]);
+
+  const save = () => {
+    setIsSaving(true);
+  };
+
+  const handleSave = async () => {
+    const elementId: GridType = 'capture';
+    const element = document.getElementById(elementId);
+    try {
+      if (!element) throw new Error();
+      const canvas = await html2canvas(element, { backgroundColor: null });
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'dotoori';
+      link.click();
+    } catch (error) {
+      setModal({
+        key: 'saveFail',
+        title: 'error',
+        desc: 'Sorry, saving failed due to an unknown reason.',
+        cancelBtn: { title: 'OK' },
+      });
+      console.log(`save failed: ${error}`);
+    } finally {
+      setIsSaving(false);
+      if (isShowConfig) setIsShowConfig(false);
     }
   };
 
