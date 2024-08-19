@@ -43,7 +43,6 @@ export function useExport() {
       console.log(`save failed: ${error}`);
     } finally {
       setIsSaving(false);
-      if (isShowConfig) setIsShowConfig(false);
     }
   };
 
