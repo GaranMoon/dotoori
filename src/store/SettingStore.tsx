@@ -1,5 +1,4 @@
-import { boxOption } from 'data/palette';
-import { BackgroundColor, COLLAPSE_MAX, LayoutMode } from 'type/common';
+import { BackgroundColor, COLLAPSE_MAX, DEFAULT_BG, DEFAUT_BOX, LayoutMode } from 'type/common';
 import { create } from 'zustand';
 
 interface Props {
@@ -19,8 +18,8 @@ export const useSettingStore = create<Props>((set) => ({
   layoutMode: window.innerWidth < COLLAPSE_MAX ? LayoutMode.COLLAPSE : LayoutMode.NONE,
   isShowConfig: false,
   isSaving: false,
-  numOfBoxs: boxOption[1],
-  backgroundColor: BackgroundColor.WHITE,
+  numOfBoxs: DEFAUT_BOX,
+  backgroundColor: DEFAULT_BG,
   setLayoutMode: (layoutMode) => set(() => ({ layoutMode })),
   setIsShowConfig: (isShowConfig) => set(() => ({ isShowConfig })),
   setIsSaving: (isSaving) => set(() => ({ isSaving })),

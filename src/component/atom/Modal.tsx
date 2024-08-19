@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { getClass } from 'util/common';
 
-import { Adsense, ButtonProps, ModalTemplate } from 'component/atom';
+import { ButtonProps, ModalTemplate } from 'component/atom';
 import { useModalStore } from 'store/ModalStore';
 import { MODAL_DELAY } from 'type/common';
 
@@ -37,9 +37,9 @@ function Modal() {
           <ModalTemplate modal={_modal} onClose={handleClose} />
         </div>
       </div>
-      <div className={styles.ad}>
+      {/* <div className={styles.ad}>
         <Adsense type="overlay" />
-      </div>
+      </div> */}
     </div>
   ) : null;
 }

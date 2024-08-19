@@ -6,6 +6,7 @@
   justify-content: space-between;
   padding-right: 20px;
   height: 95%;
+  position: relative;
 
   .squareGroup {
     display: flex;
@@ -37,5 +38,13 @@
     gap: 0;
     padding: 5px 0 7px 0;
     width: 100%;
+  }
+
+  .ad {
+    position: absolute;
+    width: 150px;
+    height: 100%;
+    top: 0;
+    left: 0;
   }
 }
