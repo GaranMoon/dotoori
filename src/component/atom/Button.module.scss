@@ -3,10 +3,8 @@
   align-items: center;
   justify-content: center;
   background-color: #e7e7e7e7;
-  border-top: 2px solid darkgray;
-  border-right: 2px solid dimgray;
-  border-bottom: 2px solid dimgray;
-  border-left: 2px solid darkgray;
+  border: 2px solid;
+  border-color: darkgray dimgray dimgray darkgray;
 
   &.sm {
     width: 30px;
@@ -40,10 +38,7 @@
   &:hover,
   &.disabled {
     background-color: #00000010;
-    border-top: 2px solid dimgray;
-    border-right: 2px solid darkgray;
-    border-bottom: 2px solid darkgray;
-    border-left: 2px solid dimgray;
+    border-color: dimgray darkgray darkgray dimgray;
 
     &.sm {
       padding-top: 1px;
