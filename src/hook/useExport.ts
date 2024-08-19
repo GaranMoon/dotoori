@@ -11,7 +11,7 @@ import { useSettingStore } from 'store/SettingStore';
 export function useExport() {
   const { setModal } = useModalStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
-  const { numOfBoxs, isSaving, setIsSaving } = useSettingStore((state) => state);
+  const { isSaving, numOfBoxs, backgroundColor, setIsSaving } = useSettingStore((state) => state);
 
   useEffect(() => {
     if (isSaving) handleSave();
@@ -51,8 +51,7 @@ export function useExport() {
   };
 
   const share = async () => {
-    const zipMap = LZString.compressToEncodedURIComponent(JSON.stringify(colorMap));
-    const url = `${window.location.origin}/?box=${numOfBoxs}&shared=${zipMap}`;
+    const url = `${window.location.origin}/?box=${numOfBoxs}&bg=${backgroundColor}&shared=${compressColorMap()}`;
     if (navigator.share) {
       try {
         await navigator.share({ title: document.title, url });
@@ -62,6 +61,17 @@ export function useExport() {
       return;
     }
     copyToClipboard(url);
+  };
+
+  const compressColorMap = () => {
+    const compression: { [key: string]: string[] } = {};
+    for (const [key, value] of Object.entries(colorMap)) {
+      if (!compression[value]) {
+        compression[value] = [];
+      }
+      compression[value].push(key);
+    }
+    return LZString.compressToEncodedURIComponent(JSON.stringify(compression));
   };
 
   const copyToClipboard = (url: string) => {
