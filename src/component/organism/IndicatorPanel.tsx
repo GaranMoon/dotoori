@@ -1,6 +1,6 @@
 import { getClass } from 'util/common';
 
-import { Button, ColorChip, Eraser, Grid } from 'component/atom';
+import { Adsense, Button, ColorChip, Eraser, Grid } from 'component/atom';
 import { ArrowButtonSet } from 'component/organism';
 import { useMapHistory } from 'hook/useMapHistory';
 import { useTool } from 'hook/useTool';
@@ -73,6 +73,9 @@ function IndicatorPanel() {
         <ArrowButtonSet />
       </div>
       {renderButton('md', 'undo')}
+      <div className={styles.ad}>
+        <Adsense type="vertical" />
+      </div>
     </div>
   ) : (
     <div className={getClass(['container', layoutMode], styles)}>

@@ -1,6 +1,6 @@
 import { getClass } from 'util/common';
 
-import { Button } from 'component/atom';
+import { Adsense, Button } from 'component/atom';
 import { BoxRadioSet, ConfigButtonSet, ArrowButtonSet } from 'component/organism';
 import { useMapHistory } from 'hook/useMapHistory';
 import { BiRedo } from 'react-icons/bi';
@@ -26,7 +26,17 @@ function ConfigPanel() {
           <ArrowButtonSet size="sm" />
         </div>
       ) : (
-        <Button title={<BiRedo />} size="md" disabled={historyIndex === history.length - 1} onClick={redo} />
+        <>
+          <Button
+            title={<BiRedo />}
+            size="md"
+            disabled={historyIndex === history.length - 1}
+            onClick={redo}
+          />
+          <div className={styles.ad}>
+            <Adsense type="vertical" />
+          </div>
+        </>
       )}
     </div>
   );
