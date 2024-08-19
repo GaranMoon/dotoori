@@ -1,6 +1,5 @@
 .container {
   aspect-ratio: 1 / 1;
-  background-color: white;
 
   * {
     padding: 0;
@@ -20,6 +19,24 @@
     }
   }
 
+  &.bgWhite {
+    .tableWrapper {
+      background-color: white;
+    }
+  }
+
+  &.bgBlack {
+    .tableWrapper {
+      background-color: black;
+    }
+
+    &.edit {
+      td {
+        border: 1px solid lightgray;
+      }
+    }
+  }
+
   &.preview {
     width: 50px;
     border: 1px solid black;
@@ -32,20 +49,14 @@
   &.edit {
     width: 100%;
 
-    .tableWrapper {
-      table {
-        td {
-          border: 1px solid black;
-        }
-      }
+    td {
+      border: 1px solid black;
+    }
+  }
 
-      &.capture {
-        table {
-          td {
-            border: none;
-          }
-        }
-      }
+  &.capture {
+    td {
+      border: none;
     }
   }
 }

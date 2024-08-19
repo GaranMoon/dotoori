@@ -1,0 +1,134 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  position: absolute;
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+  }
+
+  &.up {
+    top: 0;
+    border-top-left-radius: 20%;
+    border-top-right-radius: 20%;
+
+    .icon {
+      margin-top: -7px;
+      transform: rotate(90deg);
+    }
+  }
+
+  &.down {
+    bottom: 0;
+    border-bottom-left-radius: 20%;
+    border-bottom-right-radius: 20%;
+
+    .icon {
+      margin-bottom: -7px;
+      transform: rotate(-90deg);
+    }
+  }
+
+  &.left {
+    left: 0;
+    border-top-left-radius: 20%;
+    border-bottom-left-radius: 20%;
+
+    .icon {
+      margin-left: -7px;
+    }
+  }
+
+  &.right {
+    right: 0;
+    border-top-right-radius: 20%;
+    border-bottom-right-radius: 20%;
+
+    .icon {
+      margin-right: -7px;
+      transform: rotate(180deg);
+    }
+  }
+
+  &.center {
+    width: 52px;
+    aspect-ratio: 1 / 1;
+
+    .icon {
+      margin-top: -0.5px;
+      margin-left: -0.5px;
+      font-size: 35px;
+    }
+
+    .bgTransparent {
+      margin-left: -1px;
+      position: absolute;
+      width: 25px;
+      height: 3px;
+      background-color: darkslategray;
+      transform: rotate(-45deg);
+    }
+  }
+
+  &.up,
+  &.down {
+    width: 52px;
+    height: 56px;
+  }
+
+  &.left,
+  &.right {
+    width: 56px;
+    height: 52px;
+  }
+
+  &.lg {
+    background-color: lightslategray;
+    border-top: 2px solid #8da0b4;
+    border-right: 2px solid #576878;
+    border-bottom: 2px solid #576878;
+    border-left: 2px solid #8da0b4;
+
+    .icon {
+      color: darkslategray;
+    }
+
+    &:hover {
+      background-color: rgb(98, 113, 129);
+      border-top: 2px solid #00000010;
+      border-right: 2px solid #ffffff20;
+      border-bottom: 2px solid #ffffff20;
+      border-left: 2px solid #00000010;
+
+      .icon,
+      .bgTransparent {
+        translate: 0 1px;
+      }
+    }
+  }
+
+  &.sm {
+    z-index: 990;
+
+    &.up {
+      margin-top: -9px;
+    }
+
+    &.down {
+      margin-bottom: -9px;
+    }
+
+    &.left {
+      margin-left: -9px;
+    }
+
+    &.right {
+      margin-right: -9px;
+    }
+  }
+}

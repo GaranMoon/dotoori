@@ -1,9 +1,13 @@
-import { Grid } from 'component/atom';
+import { Grid, GridType } from 'component/atom';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useToolStore } from 'store/ToolStore';
 import { Tool } from 'type/common';
 
-function GridEditor() {
+interface Props {
+  mode: GridType;
+}
+
+function GridEditor({ mode }: Props) {
   const { tool, picker, isOn, setIsOn } = useToolStore((state) => state);
   const { colorMap, setColorMap } = useColorMapStore((state) => state);
 
@@ -21,7 +25,7 @@ function GridEditor() {
 
   return (
     <Grid
-      mode="edit"
+      mode={mode}
       tdProps={(key) => ({
         onMouseDown: () => handleDraw(key, true),
         onMouseMove: () => handleDraw(key),

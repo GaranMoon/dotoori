@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 176px;
+  height: 176px;
+  position: relative;
+
+  &.sm {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+}

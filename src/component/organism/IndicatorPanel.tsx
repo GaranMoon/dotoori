@@ -1,7 +1,7 @@
 import { getClass } from 'util/common';
 
-import { Button, ButtonProps, ColorChip, Eraser, Grid } from 'component/atom';
-import { ButtonGroup } from 'component/molecule';
+import { Button, ColorChip, Eraser, Grid } from 'component/atom';
+import { ArrowButtonSet } from 'component/organism';
 import { useMapHistory } from 'hook/useMapHistory';
 import { useTool } from 'hook/useTool';
 import { BiUndo } from 'react-icons/bi';
@@ -20,12 +20,6 @@ function IndicatorPanel() {
   const { tool, picker } = useToolStore((state) => state);
   const { history, historyIndex } = useColorMapStore((state) => state);
   const squareSize = layoutMode === LayoutMode.COLLAPSE ? 'md' : 'lg';
-
-  const getButtonProps = (direction?: 'undo' | 'redo'): ButtonProps => {
-    return direction === 'undo'
-      ? { title: <BiUndo />, size: 'sm', disabled: !historyIndex, onClick: undo }
-      : { title: <BiRedo />, size: 'sm', disabled: historyIndex === history.length - 1, onClick: redo };
-  };
 
   const renderGrid = () => {
     return (
@@ -60,20 +54,33 @@ function IndicatorPanel() {
     );
   };
 
+  const renderButton = (size: 'sm' | 'md', direction: 'undo' | 'redo') => {
+    return direction === 'undo' ? (
+      <Button title={<BiUndo />} size={size} disabled={!historyIndex} onClick={undo} />
+    ) : (
+      <Button title={<BiRedo />} size={size} disabled={historyIndex === history.length - 1} onClick={redo} />
+    );
+  };
+
   return layoutMode !== LayoutMode.COLLAPSE ? (
     <div className={styles.container}>
-      {renderGrid()}
-      {renderColorChop()}
-      {renderEraser()}
-      <ButtonGroup buttons={[getButtonProps('undo'), getButtonProps('redo')]} />
+      <div className={styles.squareGroup}>
+        {renderGrid()}
+        {renderColorChop()}
+        {renderEraser()}
+      </div>
+      <div className={styles.arrow}>
+        <ArrowButtonSet />
+      </div>
+      {renderButton('md', 'undo')}
     </div>
   ) : (
     <div className={getClass(['container', layoutMode], styles)}>
-      <Button {...getButtonProps('undo')} />
+      {renderButton('sm', 'undo')}
       {renderColorChop()}
       {renderGrid()}
       {renderEraser()}
-      <Button {...getButtonProps('redo')} />
+      {renderButton('sm', 'redo')}
     </div>
   );
 }
