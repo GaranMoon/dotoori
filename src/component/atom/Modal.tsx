@@ -2,7 +2,7 @@ import { ReactNode, useEffect, useState } from 'react';
 
 import { getClass } from 'util/common';
 
-import { ButtonProps, ModalTemplate } from 'component/atom';
+import { Adsense, ButtonProps, ModalTemplate } from 'component/atom';
 import { useModalStore } from 'store/ModalStore';
 import { MODAL_DELAY } from 'type/common';
 
@@ -31,9 +31,14 @@ function Modal() {
 
   return _modal ? (
     <div className={getClass(['container', modal ? 'fadeIn' : 'fadeOut'], styles)}>
-      <div className={styles.overlay} onClick={handleClose} />
-      <div className={getClass(['modal', modal ? 'appear' : 'disappear'], styles)}>
-        <ModalTemplate modal={_modal} onClose={handleClose} />
+      <div className={styles.wrapper}>
+        <div className={styles.overlay} onClick={handleClose} />
+        <div className={getClass(['modal', modal ? 'appear' : 'disappear'], styles)}>
+          <ModalTemplate modal={_modal} onClose={handleClose} />
+        </div>
+      </div>
+      <div className={styles.ad}>
+        <Adsense type="overlay" />
       </div>
     </div>
   ) : null;

@@ -31,6 +31,12 @@ export function useExport() {
       link.href = canvas.toDataURL('image/png');
       link.download = 'dotoori';
       link.click();
+      setModal({
+        key: 'saveSuccess',
+        title: 'success',
+        desc: 'Saved!',
+        cancelBtn: { title: 'OK' },
+      });
     } catch (error) {
       setModal({
         key: 'saveFail',

@@ -1,3 +1,4 @@
+export { default as Adsense } from './Adsense';
 export { default as ArrowButton } from './ArrowButton';
 export { default as Button } from './Button';
 export type { ButtonProps } from './Button';
