@@ -29,7 +29,12 @@ function Home() {
   };
 
   return (
-    <div className={styles.container} style={{ touchAction: 'none' }} onMouseUp={handleMouseUp}>
+    <div
+      className={styles.container}
+      style={{ touchAction: 'none' }}
+      onMouseUp={handleMouseUp}
+      onTouchEnd={handleMouseUp}
+    >
       <TopArea />
       <MiddleArea />
       <BottomArea />

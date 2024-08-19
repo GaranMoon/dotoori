@@ -26,6 +26,7 @@ const config = [
       '@typescript-eslint/no-unused-vars': 'warn',
       'unused-imports/no-unused-imports': 'warn',
       '@typescript-eslint/no-unused-expressions': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
       'import/order': [
         'warn',
         {
