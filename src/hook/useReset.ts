@@ -25,13 +25,16 @@ export function useReset() {
   };
 
   const reset = (boxs?: number) => {
-    setTool(null);
-    setPicker('');
     setColorMap({});
     setHistory([{}]);
     setHistoryIndex(0);
+    if (boxs) {
+      setNumOfBoxs(boxs);
+      return;
+    }
+    setTool(null);
+    setPicker('');
     setIsShowConfig(false);
-    if (boxs) setNumOfBoxs(boxs);
   };
 
   return { confirmReset, reset };
