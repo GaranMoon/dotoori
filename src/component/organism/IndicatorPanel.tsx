@@ -9,7 +9,7 @@ import { BiRedo } from 'react-icons/bi';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
-import { LayoutMode, Tool, ToolStatus } from 'type/common';
+import { Tool, ToolStatus } from 'type/common';
 
 import styles from './IndicatorPanel.module.scss';
 
@@ -19,7 +19,7 @@ function IndicatorPanel() {
   const { layoutMode } = useSettingStore((state) => state);
   const { tool, picker } = useToolStore((state) => state);
   const { history, historyIndex } = useColorMapStore((state) => state);
-  const squareSize = layoutMode === LayoutMode.COLLAPSE ? 'md' : 'lg';
+  const squareSize = !layoutMode ? 'lg' : 'md';
 
   const renderGrid = () => {
     return (
@@ -62,22 +62,26 @@ function IndicatorPanel() {
     );
   };
 
-  return layoutMode !== LayoutMode.COLLAPSE ? (
-    <div className={styles.container}>
-      <div className={styles.squareGroup}>
-        {renderGrid()}
-        {renderColorChop()}
-        {renderEraser()}
+  if (!layoutMode) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.squareGroup}>
+          {renderGrid()}
+          {renderColorChop()}
+          {renderEraser()}
+        </div>
+        <div className={styles.arrow}>
+          <ArrowButtonSet />
+        </div>
+        {renderButton('md', 'undo')}
+        <div className={styles.ad}>
+          <Adsense type="vertical" />
+        </div>
       </div>
-      <div className={styles.arrow}>
-        <ArrowButtonSet />
-      </div>
-      {renderButton('md', 'undo')}
-      <div className={styles.ad}>
-        <Adsense type="vertical" />
-      </div>
-    </div>
-  ) : (
+    );
+  }
+
+  return (
     <div className={getClass(['container', layoutMode], styles)}>
       {renderButton('sm', 'undo')}
       {renderColorChop()}

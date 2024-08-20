@@ -3,7 +3,6 @@ import { getClass } from 'util/common';
 import { Title } from 'component/atom';
 import { GrMore, GrMoreVertical } from 'react-icons/gr';
 import { useSettingStore } from 'store/SettingStore';
-import { LayoutMode } from 'type/common';
 
 import styles from './Header.module.scss';
 
@@ -14,11 +13,15 @@ function Header() {
     setIsShowConfig(!isShowConfig);
   };
 
-  return layoutMode !== LayoutMode.COLLAPSE ? (
-    <div className={styles.container}>
-      <Title />
-    </div>
-  ) : (
+  if (!layoutMode) {
+    return (
+      <div className={styles.container}>
+        <Title />
+      </div>
+    );
+  }
+
+  return (
     <div className={getClass(['container', layoutMode], styles)}>
       <Title />
       <div className={styles.more} onClick={handleShowConfig}>

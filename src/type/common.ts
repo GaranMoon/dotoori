@@ -1,8 +1,8 @@
 import { boxOption } from 'data/palette';
 
 export enum LayoutMode {
-  COLLAPSE = 'collapse',
   NONE = '',
+  COLLAPSE = 'collapse',
 }
 
 export type Color = { [key: string]: string };

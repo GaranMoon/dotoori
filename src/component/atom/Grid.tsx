@@ -5,7 +5,7 @@ import { getClass, getColorMapKey } from 'util/common';
 import { useTool } from 'hook/useTool';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
-import { LayoutMode, SAVE_MAX_SIZE } from 'type/common';
+import { SAVE_MAX_SIZE } from 'type/common';
 
 import styles from './Grid.module.scss';
 
@@ -26,7 +26,7 @@ function Grid({ mode = 'preview', tdProps }: Props) {
   }, [numOfBoxs]);
 
   const handleClick = () => {
-    if (mode === 'edit' || layoutMode !== LayoutMode.COLLAPSE) return;
+    if (mode === 'edit' || !layoutMode) return;
     switchBackgroundColor();
   };
 

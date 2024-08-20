@@ -6,7 +6,6 @@ import { useMapHistory } from 'hook/useMapHistory';
 import { BiRedo } from 'react-icons/bi';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { useSettingStore } from 'store/SettingStore';
-import { LayoutMode } from 'type/common';
 
 import styles from './ConfigPanel.module.scss';
 
@@ -15,29 +14,30 @@ function ConfigPanel() {
   const { layoutMode } = useSettingStore((state) => state);
   const { history, historyIndex } = useColorMapStore((state) => state);
 
+  if (!layoutMode) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.config}>
+          <ConfigButtonSet />
+          <BoxRadioSet />
+        </div>
+        <Button title={<BiRedo />} size="md" disabled={historyIndex === history.length - 1} onClick={redo} />
+        <div className={styles.ad}>
+          <Adsense type="vertical" />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={getClass(['container', layoutMode], styles)}>
       <div className={styles.config}>
         <ConfigButtonSet />
         <BoxRadioSet />
       </div>
-      {layoutMode === LayoutMode.COLLAPSE ? (
-        <div className={styles.arrow}>
-          <ArrowButtonSet size="sm" />
-        </div>
-      ) : (
-        <>
-          <Button
-            title={<BiRedo />}
-            size="md"
-            disabled={historyIndex === history.length - 1}
-            onClick={redo}
-          />
-          <div className={styles.ad}>
-            <Adsense type="vertical" />
-          </div>
-        </>
-      )}
+      <div className={styles.arrow}>
+        <ArrowButtonSet size="sm" />
+      </div>
     </div>
   );
 }
