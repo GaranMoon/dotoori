@@ -5,11 +5,11 @@ import copy from 'copy-to-clipboard';
 import html2canvas from 'html2canvas';
 import LZString from 'lz-string';
 import { useColorMapStore } from 'store/ColorMapStore';
-import { useModalStore } from 'store/ModalStore';
+import { usePopupStore } from 'store/PopupStore';
 import { useSettingStore } from 'store/SettingStore';
 
 export function useExport() {
-  const { setModal } = useModalStore((state) => state);
+  const { setModal } = usePopupStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
   const { isSaving, numOfBoxs, backgroundColor, setIsSaving } = useSettingStore((state) => state);
 

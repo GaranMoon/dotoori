@@ -10,12 +10,12 @@
 
   &.fadeIn {
     opacity: 0;
-    animation: fadeIn $modal-delay forwards;
+    animation: fadeIn $popup-delay forwards;
   }
 
   &.fadeOut {
     opacity: 1;
-    animation: fadeOut $modal-delay forwards;
+    animation: fadeOut $popup-delay forwards;
   }
 
   .wrapper {
@@ -28,12 +28,12 @@
       position: absolute;
 
       &.appear {
-        animation: appear $modal-delay forwards;
+        animation: appear $popup-delay forwards;
       }
 
       &.disappear {
         opacity: 1;
-        animation: disappear $modal-delay forwards;
+        animation: disappear $popup-delay forwards;
       }
     }
 

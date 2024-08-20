@@ -25,7 +25,7 @@ export enum BackgroundColor {
   TRANSPARENT = 'bgTransparent',
 }
 
-export const MODAL_DELAY = 300;
+export const POPUP_DELAY = 300;
 export const COLLAPSE_MAX = 932;
 export const SAVE_MAX_SIZE = 500;
 export const DEFAUT_BOX = boxOption[1];

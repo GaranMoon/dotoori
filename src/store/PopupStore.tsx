@@ -6,7 +6,7 @@ interface Props {
   setModal: (e: ModalProps | null) => void;
 }
 
-export const useModalStore = create<Props>((set) => ({
+export const usePopupStore = create<Props>((set) => ({
   modal: null,
   setModal: (modal) => set(() => ({ modal })),
 }));

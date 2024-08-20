@@ -3,8 +3,8 @@ import { ReactNode, useEffect, useState } from 'react';
 import { getClass } from 'util/common';
 
 import { ButtonProps, ModalTemplate } from 'component/atom';
-import { useModalStore } from 'store/ModalStore';
-import { MODAL_DELAY } from 'type/common';
+import { usePopupStore } from 'store/PopupStore';
+import { POPUP_DELAY } from 'type/common';
 
 import styles from './Modal.module.scss';
 
@@ -17,7 +17,7 @@ export interface ModalProps {
 }
 
 function Modal() {
-  const { modal, setModal } = useModalStore((state) => state);
+  const { modal, setModal } = usePopupStore((state) => state);
   const [_modal, _setModal] = useState<ModalProps | null>(null);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function Modal() {
 
   const handleClose = () => {
     setModal(null);
-    setTimeout(() => _setModal(null), MODAL_DELAY);
+    setTimeout(() => _setModal(null), POPUP_DELAY);
   };
 
   return _modal ? (
