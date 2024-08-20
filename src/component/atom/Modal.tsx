@@ -10,7 +10,7 @@ import styles from './Modal.module.scss';
 
 export interface ModalProps {
   key: string;
-  title: 'success' | 'error' | 'warning';
+  title: 'success' | 'error' | 'warning' | 'info';
   desc?: string | ReactNode;
   actionBtn?: ButtonProps;
   cancelBtn?: ButtonProps;

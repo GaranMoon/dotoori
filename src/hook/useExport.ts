@@ -22,24 +22,26 @@ export function useExport() {
   };
 
   const handleSave = async () => {
+    if (checkKakao()) return;
+    setModal({
+      key: 'saving',
+      title: 'info',
+      desc: 'Saving...',
+    });
     const elementId: GridType = 'capture';
     const element = document.getElementById(elementId);
+    let isSuccess = false;
     try {
       if (!element) throw new Error();
       const canvas = await html2canvas(element, { backgroundColor: null });
       const link = document.createElement('a');
       link.href = canvas.toDataURL('image/png');
-      link.download = 'dotoori';
+      link.download = 'dotoori.png';
       link.click();
-      setModal({
-        key: 'saveSuccess',
-        title: 'success',
-        desc: 'Saved!',
-        cancelBtn: { title: 'OK' },
-      });
+      isSuccess = true;
     } catch (error) {
       setModal({
-        key: 'saveFail',
+        key: 'save-fail',
         title: 'error',
         desc: 'Sorry, saving failed due to an unknown reason.',
         cancelBtn: { title: 'OK' },
@@ -47,7 +49,28 @@ export function useExport() {
       console.log(`save failed: ${error}`);
     } finally {
       setIsSaving(false);
+      if (isSuccess) {
+        setModal({
+          key: 'save-success',
+          title: 'success',
+          desc: 'Saved!',
+          cancelBtn: { title: 'OK' },
+        });
+      }
     }
+  };
+
+  const checkKakao = () => {
+    const isKakao = /KAKAOTALK/i.test(navigator.userAgent);
+    if (isKakao) {
+      setModal({
+        key: 'save-fail-kakao',
+        title: 'error',
+        desc: 'The KakaoTalk in-app browser does not support image downloads. Please try other browsers such as Chrome or Safari.',
+        cancelBtn: { title: 'OK' },
+      });
+    }
+    return isKakao;
   };
 
   const share = async () => {
