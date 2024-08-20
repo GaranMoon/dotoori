@@ -1,4 +1,4 @@
-import { ModalProps } from 'component/atom';
+import { ModalProps } from 'component/molecule';
 import { create } from 'zustand';
 
 interface Props {
