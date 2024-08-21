@@ -15,25 +15,19 @@ function ConfigPanel() {
   const { layoutMode } = useSettingStore((state) => state);
   const { history, historyIndex } = useColorMapStore((state) => state);
 
-  const renderConfigButtons = () => {
-    return (
-      <div className={styles.config}>
-        <div>
-          <ConfigButtonSet />
-        </div>
-        <div>
-          <GuideBox guideKey="boxOption">
-            <BoxRadioSet />
-          </GuideBox>
-        </div>
-      </div>
-    );
-  };
-
   if (!layoutMode) {
     return (
       <div className={styles.container}>
-        {renderConfigButtons()}
+        <div className={styles.config}>
+          <div>
+            <ConfigButtonSet />
+          </div>
+          <div>
+            <GuideBox guideKey="boxOption">
+              <BoxRadioSet />
+            </GuideBox>
+          </div>
+        </div>
         <GuideBox guideKey="redo">
           <Button
             title={<BiRedo />}
@@ -51,7 +45,16 @@ function ConfigPanel() {
 
   return (
     <div className={getClass(['container', layoutMode], styles)}>
-      {renderConfigButtons()}
+      <div className={styles.config}>
+        <div>
+          <GuideBox guideKey="boxOption">
+            <BoxRadioSet />
+          </GuideBox>
+        </div>
+        <div>
+          <ConfigButtonSet />
+        </div>
+      </div>
       <div className={styles.arrow}>
         <ArrowButtonSet size="sm" />
       </div>

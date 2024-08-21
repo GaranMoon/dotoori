@@ -1,4 +1,5 @@
 export { default as ButtonGroup } from './ButtonGroup';
+export { default as Capture } from './Capture';
 export { default as GuideBox } from './GuideBox';
 export type { GuideKey } from './GuideBox';
 export { default as Modal } from './Modal';

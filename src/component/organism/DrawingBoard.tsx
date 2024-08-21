@@ -6,17 +6,11 @@ import { useSettingStore } from 'store/SettingStore';
 import styles from './DrawingBoard.module.scss';
 
 function DrawingBoard() {
-  const { isShowConfig, isSaving } = useSettingStore((state) => state);
+  const { isShowConfig } = useSettingStore((state) => state);
 
   return (
     <div className={styles.container}>
       <Frame width={10}>
-        {isSaving && (
-          <div className={styles.capture}>
-            <GridEditor mode="capture" />
-            <div className={styles.cover}></div>
-          </div>
-        )}
         <GuideBox>
           <GridEditor mode="edit" />
         </GuideBox>
