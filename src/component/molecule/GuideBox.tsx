@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 import { getClass } from 'util/common';
 
@@ -27,10 +27,10 @@ export type GuideKey =
 interface Props {
   children: ReactNode;
   guideKey?: GuideKey;
-  style?: CSSProperties;
+  customStyle?: boolean;
 }
 
-function GuideBox({ children, guideKey, style }: Props) {
+function GuideBox({ children, guideKey, customStyle }: Props) {
   const { isShowGuide } = useSettingStore((state) => state);
   const { getGuideToast } = usePopup();
   const containerStyle = isShowGuide ? (guideKey ? 'guideBox' : 'none') : '';
@@ -41,7 +41,10 @@ function GuideBox({ children, guideKey, style }: Props) {
   };
 
   return (
-    <div className={getClass(['container', containerStyle], styles)} style={style} onClick={handleClick}>
+    <div
+      className={getClass(['container', containerStyle, customStyle ? guideKey : ''], styles)}
+      onClick={handleClick}
+    >
       <div className={styles.cover} />
       {children}
     </div>

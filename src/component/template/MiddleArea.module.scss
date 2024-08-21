@@ -1,5 +1,7 @@
 .container {
   display: flex;
   flex: 1;
+  justify-content: center;
   overflow: hidden;
+  position: relative;
 }

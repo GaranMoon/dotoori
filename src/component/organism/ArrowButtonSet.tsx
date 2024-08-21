@@ -26,16 +26,16 @@ function ArrowButtonSet({ size = 'lg' }: Props) {
   const renderDirectionSet = (icon?: ReactNode) => {
     return (
       <>
-        <GuideBox guideKey="arrowUp" style={{ position: 'absolute', top: 0 }}>
+        <GuideBox guideKey="arrowUp" customStyle>
           <ArrowButton size={size} icon={icon} direction="up" onClick={() => moveDrawing('up')} />
         </GuideBox>
-        <GuideBox guideKey="arrowLeft" style={{ position: 'absolute', left: 0 }}>
+        <GuideBox guideKey="arrowLeft" customStyle>
           <ArrowButton size={size} icon={icon} direction="left" onClick={() => moveDrawing('left')} />
         </GuideBox>
-        <GuideBox guideKey="arrowRight" style={{ position: 'absolute', right: 0 }}>
+        <GuideBox guideKey="arrowRight" customStyle>
           <ArrowButton size={size} icon={icon} direction="right" onClick={() => moveDrawing('right')} />
         </GuideBox>
-        <GuideBox guideKey="arrowDown" style={{ position: 'absolute', bottom: 0 }}>
+        <GuideBox guideKey="arrowDown" customStyle>
           <ArrowButton size={size} icon={icon} direction="down" onClick={() => moveDrawing('down')} />
         </GuideBox>
       </>
