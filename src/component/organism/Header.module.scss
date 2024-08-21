@@ -4,15 +4,59 @@
   justify-content: center;
   padding: 20px;
   height: 35px;
+  position: relative;
+
+  .more,
+  .guide {
+    cursor: pointer;
+  }
+
+  .guide {
+    &.active {
+      color: red;
+    }
+  }
+
+  &:not(&.collapse) {
+    .guide {
+      position: absolute;
+      top: 15px;
+      left: 20px;
+      width: 24px;
+      height: 24px;
+      border: 3.5px solid;
+      border-radius: 50%;
+      font-size: 27px;
+      text-align: center;
+
+      div {
+        margin-top: -1.5px;
+        padding-left: 0.3px;
+      }
+    }
+  }
 
   &.collapse {
+    justify-content: space-between;
     height: 13px;
 
+    .guide {
+      width: 17px;
+      height: 17px;
+      border: 2.7px solid;
+      border-radius: 50%;
+      font-size: 20px;
+      text-align: center;
+
+      div {
+        margin-top: -2.2px;
+        padding-left: 0.65px;
+      }
+    }
+
     .more {
-      display: flex;
-      position: absolute;
-      right: 15px;
-      padding-bottom: 1px;
+      padding-top: 5px;
+      padding-left: 3px;
       font-size: 20px;
     }
   }
