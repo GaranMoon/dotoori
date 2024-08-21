@@ -1,6 +1,7 @@
 import { getClass } from 'util/common';
 
 import { Adsense, Button } from 'component/atom';
+import { GuideBox } from 'component/molecule';
 import { BoxRadioSet, ConfigButtonSet, ArrowButtonSet } from 'component/organism';
 import { useMapHistory } from 'hook/useMapHistory';
 import { BiRedo } from 'react-icons/bi';
@@ -14,14 +15,33 @@ function ConfigPanel() {
   const { layoutMode } = useSettingStore((state) => state);
   const { history, historyIndex } = useColorMapStore((state) => state);
 
+  const renderConfigButtons = () => {
+    return (
+      <div className={styles.config}>
+        <div>
+          <ConfigButtonSet />
+        </div>
+        <div>
+          <GuideBox guideKey="boxOption">
+            <BoxRadioSet />
+          </GuideBox>
+        </div>
+      </div>
+    );
+  };
+
   if (!layoutMode) {
     return (
       <div className={styles.container}>
-        <div className={styles.config}>
-          <ConfigButtonSet />
-          <BoxRadioSet />
-        </div>
-        <Button title={<BiRedo />} size="md" disabled={historyIndex === history.length - 1} onClick={redo} />
+        {renderConfigButtons()}
+        <GuideBox guideKey="redo">
+          <Button
+            title={<BiRedo />}
+            size="md"
+            disabled={historyIndex === history.length - 1}
+            onClick={redo}
+          />
+        </GuideBox>
         <div className={styles.ad}>
           <Adsense type="vertical" />
         </div>
@@ -31,10 +51,7 @@ function ConfigPanel() {
 
   return (
     <div className={getClass(['container', layoutMode], styles)}>
-      <div className={styles.config}>
-        <ConfigButtonSet />
-        <BoxRadioSet />
-      </div>
+      {renderConfigButtons()}
       <div className={styles.arrow}>
         <ArrowButtonSet size="sm" />
       </div>

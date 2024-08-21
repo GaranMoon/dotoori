@@ -1,4 +1,5 @@
 import { Frame } from 'component/atom';
+import { GuideBox } from 'component/molecule';
 import { ConfigPanel, GridEditor } from 'component/organism';
 import { useSettingStore } from 'store/SettingStore';
 
@@ -16,7 +17,9 @@ function DrawingBoard() {
             <div className={styles.cover}></div>
           </div>
         )}
-        <GridEditor mode="edit" />
+        <GuideBox>
+          <GridEditor mode="edit" />
+        </GuideBox>
         {isShowConfig && (
           <div className={styles.config}>
             <ConfigPanel />
