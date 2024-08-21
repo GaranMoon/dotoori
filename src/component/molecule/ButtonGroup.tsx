@@ -1,22 +1,16 @@
-import { getClass } from 'util/common';
+import { ReactNode } from 'react';
 
-import { Button, ButtonProps } from 'component/atom';
+import { getClass } from 'util/common';
 
 import styles from './ButtonGroup.module.scss';
 
 interface Props {
   direction?: 'row' | 'column';
-  buttons: ButtonProps[];
+  children: ReactNode;
 }
 
-function ButtonGroup({ direction = 'row', buttons }: Props) {
-  return (
-    <div className={getClass(['container', direction], styles)}>
-      {buttons.map((_, _i) => (
-        <Button key={_i} {..._} />
-      ))}
-    </div>
-  );
+function ButtonGroup({ direction = 'row', children }: Props) {
+  return <div className={getClass(['container', direction], styles)}>{children}</div>;
 }
 
 export default ButtonGroup;
