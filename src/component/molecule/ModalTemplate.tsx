@@ -1,4 +1,5 @@
-import { Button, ModalProps } from 'component/atom';
+import { Button } from 'component/atom';
+import { ModalProps } from 'component/molecule';
 
 import styles from './ModalTemplate.module.scss';
 

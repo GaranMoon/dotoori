@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
 
-import { Modal } from 'component/atom';
+import { Modal, Toast } from 'component/molecule';
 import { BottomArea, MiddleArea, TopArea } from 'component/template';
 import { useLoad } from 'hook/useLoad';
 import { useMapHistory } from 'hook/useMapHistory';
 import useShortcut from 'hook/useShortcut';
 import { useColorMapStore } from 'store/ColorMapStore';
+import { usePopupStore } from 'store/PopupStore';
 import { useToolStore } from 'store/ToolStore';
 
 import styles from './Home.module.scss';
@@ -13,6 +14,7 @@ import styles from './Home.module.scss';
 function Home() {
   useShortcut();
   const { load } = useLoad();
+  const { toast, modal } = usePopupStore((state) => state);
   const { addHistory } = useMapHistory();
   const { isOn, setIsOn } = useToolStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
@@ -38,7 +40,8 @@ function Home() {
       <TopArea />
       <MiddleArea />
       <BottomArea />
-      <Modal />
+      {modal && <Modal />}
+      {toast && <Toast />}
     </div>
   );
 }

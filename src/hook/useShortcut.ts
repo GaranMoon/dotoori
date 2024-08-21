@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import { useColorMapStore } from 'store/ColorMapStore';
-import { useModalStore } from 'store/ModalStore';
+import { usePopupStore } from 'store/PopupStore';
 import { Tool } from 'type/common';
 
 import { useMapHistory } from './useMapHistory';
@@ -10,7 +10,7 @@ import { useTool } from './useTool';
 export default function useShortcut() {
   const { pickTool, moveDrawing } = useTool();
   const { undo, redo } = useMapHistory();
-  const { setModal } = useModalStore((state) => state);
+  const { setModal } = usePopupStore((state) => state);
   const { history, historyIndex } = useColorMapStore((state) => state);
 
   useEffect(() => {

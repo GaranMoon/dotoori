@@ -1,8 +1,8 @@
 import { boxOption } from 'data/palette';
 
 export enum LayoutMode {
-  COLLAPSE = 'collapse',
   NONE = '',
+  COLLAPSE = 'collapse',
 }
 
 export type Color = { [key: string]: string };
@@ -25,7 +25,7 @@ export enum BackgroundColor {
   TRANSPARENT = 'bgTransparent',
 }
 
-export const MODAL_DELAY = 300;
+export const POPUP_DELAY = 300;
 export const COLLAPSE_MAX = 932;
 export const SAVE_MAX_SIZE = 500;
 export const DEFAUT_BOX = boxOption[1];

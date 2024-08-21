@@ -1,5 +1,5 @@
 import { useColorMapStore } from 'store/ColorMapStore';
-import { useModalStore } from 'store/ModalStore';
+import { usePopupStore } from 'store/PopupStore';
 import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
 
@@ -7,7 +7,7 @@ export function useReset() {
   const { setTool, setPicker } = useToolStore((state) => state);
   const { history, setColorMap, setHistory, setHistoryIndex } = useColorMapStore((state) => state);
   const { setIsShowConfig, setNumOfBoxs } = useSettingStore((state) => state);
-  const { setModal } = useModalStore((state) => state);
+  const { setModal } = usePopupStore((state) => state);
 
   const confirmReset = (boxs?: number) => {
     const action = () => reset(boxs);

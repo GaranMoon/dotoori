@@ -1,0 +1,24 @@
+.container {
+  position: relative;
+
+  &.none {
+    pointer-events: none;
+  }
+
+  &.guideBox {
+    margin: -3px;
+    border: 3px dashed yellow;
+    cursor: pointer;
+
+    .cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: yellow;
+      opacity: 0.3;
+      z-index: 997;
+    }
+  }
+}

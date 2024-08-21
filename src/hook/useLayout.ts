@@ -6,7 +6,6 @@ import { COLLAPSE_MAX, LayoutMode } from 'type/common';
 export function useLayout() {
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
   const { isShowConfig, layoutMode, setLayoutMode, setIsShowConfig } = useSettingStore((state) => state);
-  const isCollapseMode = layoutMode === LayoutMode.COLLAPSE;
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);
@@ -16,10 +15,10 @@ export function useLayout() {
 
   useEffect(() => {
     if (screenWidth < COLLAPSE_MAX) {
-      if (!isCollapseMode) setLayoutMode(LayoutMode.COLLAPSE);
+      if (!layoutMode) setLayoutMode(LayoutMode.COLLAPSE);
       return;
     }
-    if (isCollapseMode) {
+    if (layoutMode) {
       setLayoutMode(LayoutMode.NONE);
       if (isShowConfig) setIsShowConfig(false);
       return;

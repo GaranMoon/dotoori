@@ -3,25 +3,45 @@ import { getClass } from 'util/common';
 import { Title } from 'component/atom';
 import { GrMore, GrMoreVertical } from 'react-icons/gr';
 import { useSettingStore } from 'store/SettingStore';
-import { LayoutMode } from 'type/common';
 
 import styles from './Header.module.scss';
 
 function Header() {
-  const { layoutMode, isShowConfig, setIsShowConfig } = useSettingStore((state) => state);
+  const { layoutMode, isShowConfig, isShowGuide, setIsShowConfig, setIsShowGuide } = useSettingStore(
+    (state) => state,
+  );
 
-  const handleShowConfig = () => {
+  const handleClickConfigIcon = () => {
     setIsShowConfig(!isShowConfig);
   };
 
-  return layoutMode !== LayoutMode.COLLAPSE ? (
-    <div className={styles.container}>
-      <Title />
-    </div>
-  ) : (
+  const handleClickGuideIcon = () => {
+    setIsShowGuide(!isShowGuide);
+  };
+
+  const renderGuideIcon = () => {
+    const style = getClass(['guide', isShowGuide ? 'active' : ''], styles);
+    return (
+      <div className={style} onClick={handleClickGuideIcon}>
+        <div>?</div>
+      </div>
+    );
+  };
+
+  if (!layoutMode) {
+    return (
+      <div className={styles.container}>
+        {renderGuideIcon()}
+        <Title />
+      </div>
+    );
+  }
+
+  return (
     <div className={getClass(['container', layoutMode], styles)}>
+      {renderGuideIcon()}
       <Title />
-      <div className={styles.more} onClick={handleShowConfig}>
+      <div className={styles.more} onClick={handleClickConfigIcon}>
         {isShowConfig ? <GrMore /> : <GrMoreVertical />}
       </div>
     </div>
