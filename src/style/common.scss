@@ -16,4 +16,8 @@ body {
   background-color: lightgray;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
+
+  * {
+    font-family: DOS, Monaco, Menlo, Consolas, 'Courier New', monospace;
+  }
 }
