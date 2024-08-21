@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Button } from 'component/atom';
-import { ButtonGroup } from 'component/molecule';
+import { ButtonGroup, GuideBox } from 'component/molecule';
 import { useExport } from 'hook/useExport';
 import { useReset } from 'hook/useReset';
 import { useColorMapStore } from 'store/ColorMapStore';
@@ -22,9 +22,15 @@ function ConfigButtonSet() {
 
   return (
     <ButtonGroup direction="column">
-      <Button title="SAVE" disabled={disableExport} onClick={() => save()} />
-      <Button title="SHARE" disabled={disableExport} onClick={() => share()} />
-      <Button title="RESET" disabled={history.length <= 1} onClick={() => confirmReset()} />
+      <GuideBox guideKey="save">
+        <Button title="SAVE" disabled={disableExport} onClick={() => save()} />
+      </GuideBox>
+      <GuideBox guideKey="share">
+        <Button title="SHARE" disabled={disableExport} onClick={() => share()} />
+      </GuideBox>
+      <GuideBox guideKey="reset">
+        <Button title="RESET" disabled={history.length <= 1} onClick={() => confirmReset()} />
+      </GuideBox>
     </ButtonGroup>
   );
 }
