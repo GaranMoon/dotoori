@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 
-import { GridType } from 'component/atom';
 import copy from 'copy-to-clipboard';
 import html2canvas from 'html2canvas';
 import LZString from 'lz-string';
@@ -28,7 +27,7 @@ export function useExport() {
       title: 'info',
       desc: 'Saving...',
     });
-    const elementId: GridType = 'capture';
+    const elementId = 'capture';
     const element = document.getElementById(elementId);
     let isSuccess = false;
     try {

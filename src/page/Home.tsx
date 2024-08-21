@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 
-import { Modal, Toast } from 'component/molecule';
+import { Capture, Modal, Toast } from 'component/molecule';
 import { BottomArea, MiddleArea, TopArea } from 'component/template';
 import { useLoad } from 'hook/useLoad';
 import { useMapHistory } from 'hook/useMapHistory';
 import useShortcut from 'hook/useShortcut';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { usePopupStore } from 'store/PopupStore';
+import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
 
 import styles from './Home.module.scss';
@@ -18,6 +19,7 @@ function Home() {
   const { addHistory } = useMapHistory();
   const { isOn, setIsOn } = useToolStore((state) => state);
   const { colorMap } = useColorMapStore((state) => state);
+  const { isSaving } = useSettingStore((state) => state);
 
   useEffect(() => {
     load();
@@ -42,6 +44,12 @@ function Home() {
       <BottomArea />
       {modal && <Modal />}
       {toast && <Toast />}
+      {isSaving && (
+        <div className={styles.capture}>
+          <Capture />
+          <div className={styles.cover}></div>
+        </div>
+      )}
     </div>
   );
 }
