@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { Button } from 'component/atom';
 import { ButtonGroup } from 'component/molecule';
 import { useExport } from 'hook/useExport';
 import { useReset } from 'hook/useReset';
@@ -20,14 +21,11 @@ function ConfigButtonSet() {
   }, [historyIndex]);
 
   return (
-    <ButtonGroup
-      direction="column"
-      buttons={[
-        { title: 'SAVE', disabled: disableExport, onClick: () => save() },
-        { title: 'SHARE', disabled: disableExport, onClick: () => share() },
-        { title: 'RESET', disabled: history.length <= 1, onClick: () => confirmReset() },
-      ]}
-    />
+    <ButtonGroup direction="column">
+      <Button title="SAVE" disabled={disableExport} onClick={() => save()} />
+      <Button title="SHARE" disabled={disableExport} onClick={() => share()} />
+      <Button title="RESET" disabled={history.length <= 1} onClick={() => confirmReset()} />
+    </ButtonGroup>
   );
 }
 
