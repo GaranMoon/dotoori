@@ -8,20 +8,12 @@ import styles from './PanelMain.module.scss';
 function PanelMain() {
   const { layoutMode } = useSettingStore((state) => state);
 
-  if (!layoutMode) {
-    return (
-      <div className={styles.container}>
-        <IndicatorPanel />
-        <DrawingBoard />
-        <ConfigPanel />
-      </div>
-    );
-  }
-
   return (
     <div className={getClass(['container', layoutMode], styles)}>
+      {!layoutMode && <IndicatorPanel />}
       <DrawingBoard />
-      <IndicatorPanel />
+      {!layoutMode && <ConfigPanel />}
+      {layoutMode && <IndicatorPanel />}
     </div>
   );
 }
