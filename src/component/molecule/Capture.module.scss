@@ -1,4 +1,11 @@
 .container {
   display: flex;
   flex-direction: row;
+  position: relative;
+
+  .watermark {
+    position: absolute;
+    right: 7px;
+    bottom: 3px;
+  }
 }
