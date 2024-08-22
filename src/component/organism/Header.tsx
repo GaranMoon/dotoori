@@ -1,5 +1,6 @@
 import { getClass } from 'util/common';
 
+import circle from 'asset/icon/circle2.png';
 import { Title } from 'component/atom';
 import { GrMore, GrMoreVertical } from 'react-icons/gr';
 import { useSettingStore } from 'store/SettingStore';
@@ -24,6 +25,7 @@ function Header() {
     return (
       <div className={style} onClick={handleClickGuideIcon}>
         <div>?</div>
+        <img src={circle} alt="" />
       </div>
     );
   };
