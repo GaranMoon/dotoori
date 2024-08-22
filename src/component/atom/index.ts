@@ -11,3 +11,4 @@ export type { GridType } from './Grid';
 export { default as Radio } from './Radio';
 export type { RadioProps } from './Radio';
 export { default as Title } from './Title';
+export { default as Watermark } from './Watermark';
