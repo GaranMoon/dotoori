@@ -4,7 +4,15 @@ import { useSettingStore } from 'store/SettingStore';
 
 export function usePopup() {
   const { isShowGuide } = useSettingStore((state) => state);
-  const { setToast } = usePopupStore((state) => state);
+  const { toast, modal, setToast } = usePopupStore((state) => state);
+
+  const closeToast = () => {
+    if (toast) document.getElementById('toast')?.click();
+  };
+
+  const closeModal = () => {
+    if (modal) document.getElementById('overlay')?.click();
+  };
 
   const getGuideToast = (key: GuideKey) => {
     if (!isShowGuide) return false;
@@ -76,5 +84,5 @@ export function usePopup() {
     setToast({ message: guideMessage });
   };
 
-  return { getGuideToast };
+  return { closeToast, closeModal, getGuideToast };
 }
