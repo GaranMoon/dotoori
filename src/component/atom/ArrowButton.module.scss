@@ -117,6 +117,10 @@
     font-size: 30px;
     color: gray;
 
+    &:active {
+      color: dimgray;
+    }
+
     &.up {
       margin-top: -9px;
     }
