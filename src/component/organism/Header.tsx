@@ -1,8 +1,8 @@
 import { getClass } from 'util/common';
 
-import circle from 'asset/icon/circle2.png';
 import { Title } from 'component/atom';
 import { GrMore, GrMoreVertical } from 'react-icons/gr';
+import { RiQuestionnaireLine } from 'react-icons/ri';
 import { useSettingStore } from 'store/SettingStore';
 
 import styles from './Header.module.scss';
@@ -24,8 +24,7 @@ function Header() {
     const style = getClass(['guide', isShowGuide ? 'active' : ''], styles);
     return (
       <div className={style} onClick={handleClickGuideIcon}>
-        <div>?</div>
-        <img src={circle} alt="" />
+        <RiQuestionnaireLine />
       </div>
     );
   };

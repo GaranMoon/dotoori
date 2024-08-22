@@ -9,10 +9,6 @@
   .more,
   .guide {
     cursor: pointer;
-
-    img {
-      position: absolute;
-    }
   }
 
   .guide {
@@ -24,32 +20,21 @@
   &:not(&.collapse) {
     .guide {
       position: absolute;
-      top: 17px;
-      left: 28px;
-      font-size: 27px;
-
-      img {
-        top: -1.5px;
-        left: -8px;
-        width: 30px;
-      }
+      top: 15px;
+      left: 22px;
+      font-size: 35px;
     }
   }
 
   &.collapse {
     justify-content: space-between;
-    height: 13px;
+    height: 12px;
 
     .guide {
-      position: relative;
-      padding-left: 5.7px;
-      font-size: 20px;
-
-      img {
-        top: 0;
-        left: 0;
-        width: 22px;
-      }
+      display: flex;
+      align-items: center;
+      padding-right: 2px;
+      font-size: 24px;
     }
 
     .more {
