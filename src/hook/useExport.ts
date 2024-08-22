@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import copy from 'copy-to-clipboard';
+import { colorData } from 'data/palette';
 import html2canvas from 'html2canvas';
 import LZString from 'lz-string';
 import { useColorMapStore } from 'store/ColorMapStore';
@@ -86,14 +87,20 @@ export function useExport() {
   };
 
   const compressColorMap = () => {
-    const compression: { [key: string]: string[] } = {};
-    for (const [key, value] of Object.entries(colorMap)) {
-      if (!compression[value]) {
-        compression[value] = [];
+    const colorList = Object.values(colorData);
+    const compressionArr: { [id: number]: string[] } = {};
+    for (const [xyIndex, color] of Object.entries(colorMap)) {
+      const id = colorList.indexOf(color);
+      if (!compressionArr[id]) {
+        compressionArr[id] = [];
       }
-      compression[value].push(key);
+      compressionArr[id].push(xyIndex);
     }
-    return LZString.compressToEncodedURIComponent(JSON.stringify(compression));
+    const compressionStr: { [id: string]: string } = {};
+    for (const [id, xyIndexList] of Object.entries(compressionArr)) {
+      compressionStr[id] = xyIndexList.join(',');
+    }
+    return LZString.compressToEncodedURIComponent(JSON.stringify(compressionStr));
   };
 
   const copyToClipboard = (url: string) => {

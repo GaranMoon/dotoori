@@ -26,7 +26,7 @@ function Toast() {
   }, [handleClose]);
 
   return toast ? (
-    <div className={styles.container} onClick={handleClose}>
+    <div id="toast" className={styles.container} onClick={handleClose}>
       <div className={getClass(['toast', animation], styles)}>
         <pre>{toast.message}</pre>
       </div>

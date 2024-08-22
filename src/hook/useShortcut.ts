@@ -1,22 +1,22 @@
 import { useEffect } from 'react';
 
 import { useColorMapStore } from 'store/ColorMapStore';
-import { usePopupStore } from 'store/PopupStore';
 import { Tool } from 'type/common';
 
 import { useMapHistory } from './useMapHistory';
+import { usePopup } from './usePopup';
 import { useTool } from './useTool';
 
 export default function useShortcut() {
   const { pickTool, moveDrawing } = useTool();
   const { undo, redo } = useMapHistory();
-  const { setModal } = usePopupStore((state) => state);
   const { history, historyIndex } = useColorMapStore((state) => state);
+  const { closeToast, closeModal } = usePopup();
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [historyIndex]);
+  }, [historyIndex, closeToast, closeModal]);
 
   const handleKeyDown = (event: WindowEventMap['keydown']) => {
     const { key, ctrlKey, metaKey, shiftKey } = event;
@@ -61,7 +61,8 @@ export default function useShortcut() {
         break;
       case 'Escape':
         event.preventDefault();
-        setModal(null);
+        closeToast();
+        closeModal();
         break;
       default:
     }

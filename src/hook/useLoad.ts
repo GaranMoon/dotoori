@@ -1,4 +1,4 @@
-import { boxOption } from 'data/palette';
+import { boxOption, colorData } from 'data/palette';
 import LZString from 'lz-string';
 import { useSearchParams } from 'react-router-dom';
 import { useColorMapStore } from 'store/ColorMapStore';
@@ -42,14 +42,21 @@ export function useLoad() {
   };
 
   const decompressColorMap = (shared: string) => {
-    const map: { [key: string]: string[] } = JSON.parse(LZString.decompressFromEncodedURIComponent(shared));
-    const decompression: Color = {};
-    for (const [key, value] of Object.entries(map)) {
-      for (const _ of value) {
-        decompression[_] = key;
+    const decompression: { [key: string]: string } = JSON.parse(
+      LZString.decompressFromEncodedURIComponent(shared),
+    );
+    const mapArr: { [id: string]: string[] } = {};
+    for (const [id, xyIndexs] of Object.entries(decompression)) {
+      mapArr[id] = xyIndexs.split(',');
+    }
+    const colorList = Object.values(colorData);
+    const map: Color = {};
+    for (const [id, xyIndexList] of Object.entries(mapArr)) {
+      for (const xyIndex of xyIndexList) {
+        map[xyIndex] = colorList[Number(id)];
       }
     }
-    return decompression;
+    return map;
   };
 
   return { load };
