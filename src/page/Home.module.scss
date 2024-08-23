@@ -1,7 +1,9 @@
 .container {
   display: flex;
   flex-direction: column;
+  min-width: 330px;
   height: 100%;
+  overflow-x: auto;
   position: absolute;
 
   .capture {

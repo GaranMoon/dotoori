@@ -1,6 +1,7 @@
 .container {
   display: flex;
   width: 500px;
+  min-width: 290px;
   max-width: calc(100vw - 40px);
   aspect-ratio: 1 / 1;
 
