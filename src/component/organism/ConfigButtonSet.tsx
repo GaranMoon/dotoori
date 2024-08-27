@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import { Button } from 'component/atom';
 import { ButtonGroup, GuideBox } from 'component/molecule';
@@ -37,4 +37,4 @@ function ConfigButtonSet() {
   );
 }
 
-export default ConfigButtonSet;
+export default memo(ConfigButtonSet);

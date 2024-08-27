@@ -1,8 +1,10 @@
+import { memo } from 'react';
+
 import { getClass } from 'util/common';
 
 import { Adsense, Button } from 'component/atom';
 import { GuideBox } from 'component/molecule';
-import { BoxRadioSet, ConfigButtonSet, ArrowButtonSet } from 'component/organism';
+import { ArrowButtonSet, BoxRadioSet, ConfigButtonSet } from 'component/organism';
 import { useMapHistory } from 'hook/useMapHistory';
 import { BiRedo } from 'react-icons/bi';
 import { useColorMapStore } from 'store/ColorMapStore';
@@ -63,4 +65,4 @@ function ConfigPanel() {
   );
 }
 
-export default ConfigPanel;
+export default memo(ConfigPanel);

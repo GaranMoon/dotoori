@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
 import { cutWords } from 'util/common';
 
@@ -57,7 +57,7 @@ function PaletteList() {
   );
 }
 
-export default PaletteList;
+export default memo(PaletteList);
 
 const getSplitList = (screenWidth: number) => {
   const result = [];

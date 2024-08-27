@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 
 import { getClass } from 'util/common';
 
@@ -41,7 +41,7 @@ function ArrowButtonSet({ size = 'lg' }: Props) {
   );
 }
 
-export default ArrowButtonSet;
+export default memo(ArrowButtonSet);
 
 function DirectionSet({ size, icon }: Props & { icon?: ReactNode }) {
   const { moveDrawing } = useTool();

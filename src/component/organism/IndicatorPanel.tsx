@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { getClass } from 'util/common';
 
 import { Adsense, Button, ColorChip, Eraser, Grid } from 'component/atom';
@@ -47,7 +49,7 @@ function IndicatorPanel() {
   );
 }
 
-export default IndicatorPanel;
+export default memo(IndicatorPanel);
 
 function PreviewSquare() {
   return (

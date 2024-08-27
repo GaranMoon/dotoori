@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { getClass } from 'util/common';
 
 import { ColorChip } from 'component/atom';
@@ -20,4 +22,4 @@ function Palette({ color, text, status }: Props) {
   );
 }
 
-export default Palette;
+export default memo(Palette);

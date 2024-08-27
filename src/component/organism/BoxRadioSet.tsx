@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { RadioGroup } from 'component/molecule';
 import { boxOption } from 'data/palette';
 import { useReset } from 'hook/useReset';
@@ -18,4 +20,4 @@ function BoxRadioSet() {
   );
 }
 
-export default BoxRadioSet;
+export default memo(BoxRadioSet);
