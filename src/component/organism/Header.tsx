@@ -8,31 +8,16 @@ import { useSettingStore } from 'store/SettingStore';
 import styles from './Header.module.scss';
 
 function Header() {
-  const { layoutMode, isShowConfig, isShowGuide, setIsShowConfig, setIsShowGuide } = useSettingStore(
-    (state) => state,
-  );
+  const { layoutMode, isShowConfig, setIsShowConfig } = useSettingStore((state) => state);
 
   const handleClickConfigIcon = () => {
     setIsShowConfig(!isShowConfig);
   };
 
-  const handleClickGuideIcon = () => {
-    setIsShowGuide(!isShowGuide);
-  };
-
-  const renderGuideIcon = () => {
-    const style = getClass(['guide', isShowGuide ? 'active' : ''], styles);
-    return (
-      <div className={style} onClick={handleClickGuideIcon}>
-        <RiQuestionnaireLine />
-      </div>
-    );
-  };
-
   if (!layoutMode) {
     return (
       <div className={styles.container}>
-        {renderGuideIcon()}
+        <GuideIcon />
         <Title />
       </div>
     );
@@ -40,7 +25,7 @@ function Header() {
 
   return (
     <div className={getClass(['container', layoutMode], styles)}>
-      {renderGuideIcon()}
+      <GuideIcon />
       <Title />
       <div className={styles.more} onClick={handleClickConfigIcon}>
         {isShowConfig ? <GrMore /> : <GrMoreVertical />}
@@ -50,3 +35,14 @@ function Header() {
 }
 
 export default Header;
+
+function GuideIcon() {
+  const { isShowGuide, setIsShowGuide } = useSettingStore((state) => state);
+  const style = getClass(['guide', isShowGuide ? 'active' : ''], styles);
+
+  return (
+    <div className={style} onClick={() => setIsShowGuide(!isShowGuide)}>
+      <RiQuestionnaireLine />
+    </div>
+  );
+}

@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 import { getColorMapKey } from 'util/common';
 
 import chroma from 'chroma-js';
@@ -13,15 +11,10 @@ import styles from './Capture.module.scss';
 function Capture() {
   const { colorMap } = useColorMapStore((state) => state);
   const { numOfBoxs, backgroundColor } = useSettingStore((state) => state);
-
-  const { boxStyle, containerStyle } = useMemo(() => {
-    const boxSize = Math.floor(SAVE_MAX_SIZE / numOfBoxs);
-    const containerSize = boxSize * numOfBoxs;
-    return {
-      boxStyle: { width: boxSize, height: boxSize },
-      containerStyle: { width: containerSize, height: containerSize },
-    };
-  }, [numOfBoxs]);
+  const boxSize = Math.floor(SAVE_MAX_SIZE / numOfBoxs);
+  const containerSize = boxSize * numOfBoxs;
+  const boxStyle = { width: boxSize, height: boxSize };
+  const containerStyle = { width: containerSize, height: containerSize };
 
   const getInvertedColor = () => {
     const targetBoxs = Math.ceil(numOfBoxs / 5) + 1;

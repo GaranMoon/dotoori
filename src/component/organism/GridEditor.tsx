@@ -15,22 +15,8 @@ function GridEditor({ mode }: Props) {
   const { tool, picker, isOn, setIsOn } = useToolStore((state) => state);
   const { colorMap, setColorMap } = useColorMapStore((state) => state);
 
-  const handleTouchMove = (event: TouchEvent<HTMLTableCellElement>, isStart?: boolean) => {
-    const touch = event.touches[0];
-    if (!touch) return;
-    const { clientX, clientY } = touch;
-    if (!clientX || !clientY) return;
-    const element = document.elementFromPoint(touch.clientX, touch.clientY);
-    if (element?.tagName !== 'TD') return;
-    const td = element as HTMLTableCellElement;
-    const tr = td.parentElement as HTMLTableRowElement;
-    const yIndex = Array.from(tr.parentElement!.children).indexOf(tr);
-    const xIndex = Array.from(tr.children).indexOf(td);
-    const key = getColorMapKey(xIndex, yIndex);
-    handleDraw(key, isStart);
-  };
-
-  const handleDraw = (key: string, isStart?: boolean) => {
+  const handleDraw = (key?: string, isStart?: boolean) => {
+    if (!key) return;
     if (!tool || (!isStart && !isOn)) return;
     if (!isOn) setIsOn(true);
     if (tool === Tool.ERASER) {
@@ -49,10 +35,25 @@ function GridEditor({ mode }: Props) {
         onMouseDown: () => handleDraw(key, true),
         onMouseMove: () => handleDraw(key),
         onTouchStart: () => handleDraw(key, true),
-        onTouchMove: (e) => handleTouchMove(e),
+        onTouchMove: (e) => handleDraw(getTouchMoveKey(e)),
       })}
     />
   );
 }
 
 export default GridEditor;
+
+const getTouchMoveKey = (event: TouchEvent<HTMLTableCellElement>) => {
+  const touch = event.touches[0];
+  if (!touch) return;
+  const { clientX, clientY } = touch;
+  if (!clientX || !clientY) return;
+  const element = document.elementFromPoint(touch.clientX, touch.clientY);
+  if (element?.tagName !== 'TD') return;
+  const td = element as HTMLTableCellElement;
+  const tr = td.parentElement as HTMLTableRowElement;
+  const yIndex = Array.from(tr.parentElement!.children).indexOf(tr);
+  const xIndex = Array.from(tr.children).indexOf(td);
+  const key = getColorMapKey(xIndex, yIndex);
+  return key;
+};
