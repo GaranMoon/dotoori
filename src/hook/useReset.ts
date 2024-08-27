@@ -4,10 +4,15 @@ import { useSettingStore } from 'store/SettingStore';
 import { useToolStore } from 'store/ToolStore';
 
 export function useReset() {
-  const { setTool, setPicker } = useToolStore((state) => state);
-  const { history, setColorMap, setHistory, setHistoryIndex } = useColorMapStore((state) => state);
-  const { setIsShowConfig, setNumOfBoxs } = useSettingStore((state) => state);
-  const { setModal } = usePopupStore((state) => state);
+  const history = useColorMapStore((state) => state.history);
+  const setTool = useToolStore((state) => state.setTool);
+  const setPicker = useToolStore((state) => state.setPicker);
+  const setColorMap = useColorMapStore((state) => state.setColorMap);
+  const setHistory = useColorMapStore((state) => state.setHistory);
+  const setHistoryIndex = useColorMapStore((state) => state.setHistoryIndex);
+  const setIsShowConfig = useSettingStore((state) => state.setIsShowConfig);
+  const setNumOfBoxs = useSettingStore((state) => state.setNumOfBoxs);
+  const setModal = usePopupStore((state) => state.setModal);
 
   const confirmReset = (boxs?: number) => {
     const action = () => reset(boxs);

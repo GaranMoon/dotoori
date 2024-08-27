@@ -17,7 +17,8 @@ interface Props {
 }
 
 function ArrowButtonSet({ size = 'lg' }: Props) {
-  const { layoutMode, backgroundColor } = useSettingStore((state) => state);
+  const layoutMode = useSettingStore((state) => state.layoutMode);
+  const backgroundColor = useSettingStore((state) => state.backgroundColor);
   const { switchBackgroundColor } = useTool();
   const centerIcon =
     backgroundColor === BackgroundColor.BLACK ? <RiCheckboxBlankCircleFill /> : <RiCheckboxBlankCircleLine />;

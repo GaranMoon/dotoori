@@ -6,7 +6,7 @@ import { useSettingStore } from 'store/SettingStore';
 import styles from './DrawingBoard.module.scss';
 
 function DrawingBoard() {
-  const { isShowConfig } = useSettingStore((state) => state);
+  const isShowConfig = useSettingStore((state) => state.isShowConfig);
 
   return (
     <div className={styles.container}>

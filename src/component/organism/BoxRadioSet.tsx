@@ -5,7 +5,7 @@ import { useSettingStore } from 'store/SettingStore';
 
 function BoxRadioSet() {
   const { confirmReset } = useReset();
-  const { numOfBoxs } = useSettingStore((state) => state);
+  const numOfBoxs = useSettingStore((state) => state.numOfBoxs);
 
   return (
     <RadioGroup

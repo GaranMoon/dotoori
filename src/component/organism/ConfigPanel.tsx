@@ -12,8 +12,9 @@ import styles from './ConfigPanel.module.scss';
 
 function ConfigPanel() {
   const { redo } = useMapHistory();
-  const { layoutMode } = useSettingStore((state) => state);
-  const { history, historyIndex } = useColorMapStore((state) => state);
+  const layoutMode = useSettingStore((state) => state.layoutMode);
+  const history = useColorMapStore((state) => state.history);
+  const historyIndex = useColorMapStore((state) => state.historyIndex);
 
   if (!layoutMode) {
     return (

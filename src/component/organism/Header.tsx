@@ -8,7 +8,9 @@ import { useSettingStore } from 'store/SettingStore';
 import styles from './Header.module.scss';
 
 function Header() {
-  const { layoutMode, isShowConfig, setIsShowConfig } = useSettingStore((state) => state);
+  const layoutMode = useSettingStore((state) => state.layoutMode);
+  const isShowConfig = useSettingStore((state) => state.isShowConfig);
+  const setIsShowConfig = useSettingStore((state) => state.setIsShowConfig);
 
   const handleClickConfigIcon = () => {
     setIsShowConfig(!isShowConfig);
@@ -37,7 +39,8 @@ function Header() {
 export default Header;
 
 function GuideIcon() {
-  const { isShowGuide, setIsShowGuide } = useSettingStore((state) => state);
+  const isShowGuide = useSettingStore((state) => state.isShowGuide);
+  const setIsShowGuide = useSettingStore((state) => state.setIsShowGuide);
   const style = getClass(['guide', isShowGuide ? 'active' : ''], styles);
 
   return (

@@ -10,8 +10,9 @@ import { useTool } from './useTool';
 export default function useShortcut() {
   const { pickTool, moveDrawing } = useTool();
   const { undo, redo } = useMapHistory();
-  const { history, historyIndex } = useColorMapStore((state) => state);
   const { closeToast, closeModal } = usePopup();
+  const history = useColorMapStore((state) => state.history);
+  const historyIndex = useColorMapStore((state) => state.historyIndex);
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);

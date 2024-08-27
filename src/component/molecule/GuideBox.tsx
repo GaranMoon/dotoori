@@ -31,7 +31,7 @@ interface Props {
 }
 
 function GuideBox({ children, guideKey, customStyle }: Props) {
-  const { isShowGuide } = useSettingStore((state) => state);
+  const isShowGuide = useSettingStore((state) => state.isShowGuide);
   const { getGuideToast } = usePopup();
   const containerStyle = isShowGuide ? (guideKey ? 'guideBox' : 'none') : '';
 

@@ -6,7 +6,7 @@ import { useSettingStore } from 'store/SettingStore';
 import styles from './Title.module.scss';
 
 function Title() {
-  const { layoutMode } = useSettingStore((state) => state);
+  const layoutMode = useSettingStore((state) => state.layoutMode);
 
   return (
     <div className={getClass(['container', layoutMode], styles)}>

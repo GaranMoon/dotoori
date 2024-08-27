@@ -16,8 +16,10 @@ interface Props {
 }
 
 function Grid({ mode = 'preview', tdProps }: Props) {
-  const { layoutMode, numOfBoxs, backgroundColor } = useSettingStore((state) => state);
-  const { colorMap } = useColorMapStore((state) => state);
+  const layoutMode = useSettingStore((state) => state.layoutMode);
+  const numOfBoxs = useSettingStore((state) => state.numOfBoxs);
+  const backgroundColor = useSettingStore((state) => state.backgroundColor);
+  const colorMap = useColorMapStore((state) => state.colorMap);
   const { switchBackgroundColor } = useTool();
 
   const handleClick = () => {

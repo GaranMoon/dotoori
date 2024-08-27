@@ -14,7 +14,7 @@ import { Tool, ToolStatus } from 'type/common';
 import styles from './IndicatorPanel.module.scss';
 
 function IndicatorPanel() {
-  const { layoutMode } = useSettingStore((state) => state);
+  const layoutMode = useSettingStore((state) => state.layoutMode);
   const squareSize = !layoutMode ? 'lg' : 'md';
 
   if (!layoutMode) {
@@ -61,7 +61,8 @@ function PreviewSquare() {
 
 function PickerSquare({ size }: { size: 'md' | 'lg' }) {
   const { pickTool } = useTool();
-  const { tool, picker } = useToolStore((state) => state);
+  const tool = useToolStore((state) => state.tool);
+  const picker = useToolStore((state) => state.picker);
 
   return (
     <div className={styles.square}>
@@ -79,7 +80,7 @@ function PickerSquare({ size }: { size: 'md' | 'lg' }) {
 
 function EraserSquare({ size }: { size: 'md' | 'lg' }) {
   const { pickTool } = useTool();
-  const { tool } = useToolStore((state) => state);
+  const tool = useToolStore((state) => state.tool);
 
   return (
     <div className={styles.square}>
@@ -96,7 +97,8 @@ function EraserSquare({ size }: { size: 'md' | 'lg' }) {
 
 function HistoryButton({ size, direction }: { size: 'sm' | 'md'; direction: 'undo' | 'redo' }) {
   const { undo, redo } = useMapHistory();
-  const { history, historyIndex } = useColorMapStore((state) => state);
+  const history = useColorMapStore((state) => state.history);
+  const historyIndex = useColorMapStore((state) => state.historyIndex);
 
   return direction === 'undo' ? (
     <GuideBox guideKey="undo">

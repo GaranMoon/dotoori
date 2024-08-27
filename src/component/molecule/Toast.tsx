@@ -12,7 +12,8 @@ export interface ToastProps {
 }
 
 function Toast() {
-  const { toast, setToast } = usePopupStore((state) => state);
+  const toast = usePopupStore((state) => state.toast);
+  const setToast = usePopupStore((state) => state.setToast);
   const [animation, setAnimation] = useState<'start' | 'end'>('start');
 
   const handleClose = () => {

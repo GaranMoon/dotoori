@@ -10,8 +10,9 @@ import { useMapHistory } from './useMapHistory';
 export function useLoad() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { addHistory } = useMapHistory();
-  const { setNumOfBoxs, setBackgroundColor } = useSettingStore((state) => state);
-  const { setColorMap } = useColorMapStore((state) => state);
+  const setNumOfBoxs = useSettingStore((state) => state.setNumOfBoxs);
+  const setBackgroundColor = useSettingStore((state) => state.setBackgroundColor);
+  const setColorMap = useColorMapStore((state) => state.setColorMap);
 
   const load = () => {
     const shared = searchParams.get('shared');

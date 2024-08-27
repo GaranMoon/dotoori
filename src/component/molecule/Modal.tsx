@@ -18,7 +18,8 @@ export interface ModalProps {
 }
 
 function Modal() {
-  const { modal, setModal } = usePopupStore((state) => state);
+  const modal = usePopupStore((state) => state.modal);
+  const setModal = usePopupStore((state) => state.setModal);
   const [animation, setAnimation] = useState<'start' | 'end'>('start');
 
   const handleClose = () => {

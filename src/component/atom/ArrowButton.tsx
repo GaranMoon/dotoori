@@ -16,7 +16,7 @@ interface Props {
 }
 
 function ArrowButton({ size = 'lg', direction, icon = <FaChevronLeft />, onClick }: Props) {
-  const { backgroundColor } = useSettingStore((state) => state);
+  const backgroundColor = useSettingStore((state) => state.backgroundColor);
 
   return (
     <div className={getClass(['container', direction, size], styles)} onClick={onClick}>

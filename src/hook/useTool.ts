@@ -8,9 +8,14 @@ import { BackgroundColor, Color, Direction, Tool } from 'type/common';
 import { useMapHistory } from './useMapHistory';
 
 export function useTool() {
-  const { picker, setTool, setPicker } = useToolStore((state) => state);
-  const { numOfBoxs, backgroundColor, setBackgroundColor } = useSettingStore((state) => state);
-  const { colorMap, setColorMap } = useColorMapStore((state) => state);
+  const picker = useToolStore((state) => state.picker);
+  const setTool = useToolStore((state) => state.setTool);
+  const setPicker = useToolStore((state) => state.setPicker);
+  const numOfBoxs = useSettingStore((state) => state.numOfBoxs);
+  const backgroundColor = useSettingStore((state) => state.backgroundColor);
+  const setBackgroundColor = useSettingStore((state) => state.setBackgroundColor);
+  const colorMap = useColorMapStore((state) => state.colorMap);
+  const setColorMap = useColorMapStore((state) => state.setColorMap);
   const { addHistory } = useMapHistory();
 
   const pickTool = (tool: Tool | null, color?: string) => {

@@ -3,8 +3,10 @@ import { usePopupStore } from 'store/PopupStore';
 import { useSettingStore } from 'store/SettingStore';
 
 export function usePopup() {
-  const { isShowGuide } = useSettingStore((state) => state);
-  const { toast, modal, setToast } = usePopupStore((state) => state);
+  const isShowGuide = useSettingStore((state) => state.isShowGuide);
+  const toast = usePopupStore((state) => state.toast);
+  const modal = usePopupStore((state) => state.modal);
+  const setToast = usePopupStore((state) => state.setToast);
 
   const closeToast = () => {
     if (toast) document.getElementById('toast')?.click();

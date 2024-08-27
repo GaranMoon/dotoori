@@ -15,11 +15,13 @@ import styles from './Home.module.scss';
 function Home() {
   useShortcut();
   const { load } = useLoad();
-  const { toast, modal } = usePopupStore((state) => state);
   const { addHistory } = useMapHistory();
-  const { isOn, setIsOn } = useToolStore((state) => state);
-  const { colorMap } = useColorMapStore((state) => state);
-  const { isSaving } = useSettingStore((state) => state);
+  const toast = usePopupStore((state) => state.toast);
+  const modal = usePopupStore((state) => state.modal);
+  const isOn = useToolStore((state) => state.isOn);
+  const setIsOn = useToolStore((state) => state.setIsOn);
+  const colorMap = useColorMapStore((state) => state.colorMap);
+  const isSaving = useSettingStore((state) => state.isSaving);
 
   useEffect(() => {
     load();

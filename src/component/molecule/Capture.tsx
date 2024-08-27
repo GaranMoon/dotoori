@@ -9,8 +9,9 @@ import { BackgroundColor, SAVE_MAX_SIZE } from 'type/common';
 import styles from './Capture.module.scss';
 
 function Capture() {
-  const { colorMap } = useColorMapStore((state) => state);
-  const { numOfBoxs, backgroundColor } = useSettingStore((state) => state);
+  const colorMap = useColorMapStore((state) => state.colorMap);
+  const numOfBoxs = useSettingStore((state) => state.numOfBoxs);
+  const backgroundColor = useSettingStore((state) => state.backgroundColor);
   const boxSize = Math.floor(SAVE_MAX_SIZE / numOfBoxs);
   const containerSize = boxSize * numOfBoxs;
   const boxStyle = { width: boxSize, height: boxSize };

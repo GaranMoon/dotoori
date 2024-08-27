@@ -9,9 +9,12 @@ import { usePopupStore } from 'store/PopupStore';
 import { useSettingStore } from 'store/SettingStore';
 
 export function useExport() {
-  const { setModal } = usePopupStore((state) => state);
-  const { colorMap } = useColorMapStore((state) => state);
-  const { isSaving, numOfBoxs, backgroundColor, setIsSaving } = useSettingStore((state) => state);
+  const colorMap = useColorMapStore((state) => state.colorMap);
+  const isSaving = useSettingStore((state) => state.isSaving);
+  const numOfBoxs = useSettingStore((state) => state.numOfBoxs);
+  const backgroundColor = useSettingStore((state) => state.backgroundColor);
+  const setModal = usePopupStore((state) => state.setModal);
+  const setIsSaving = useSettingStore((state) => state.setIsSaving);
 
   useEffect(() => {
     if (isSaving) handleSave();

@@ -5,7 +5,7 @@ import { useSettingStore } from 'store/SettingStore';
 import styles from './MiddleArea.module.scss';
 
 function MiddleArea() {
-  const { isShowGuide } = useSettingStore((state) => state);
+  const isShowGuide = useSettingStore((state) => state.isShowGuide);
 
   return (
     <div className={styles.container}>

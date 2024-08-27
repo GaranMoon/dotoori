@@ -20,8 +20,10 @@ function PaletteList() {
   const { screenWidth } = useLayout();
   const [splitList, setSplitList] = useState<Color[][]>([]);
   const [usedColors, setUsedColors] = useState<string[]>([]);
-  const { tool, picker } = useToolStore((state) => state);
-  const { colorMap, historyIndex } = useColorMapStore((state) => state);
+  const tool = useToolStore((state) => state.tool);
+  const picker = useToolStore((state) => state.picker);
+  const colorMap = useColorMapStore((state) => state.colorMap);
+  const historyIndex = useColorMapStore((state) => state.historyIndex);
 
   useEffect(() => {
     setSplitList(getSplitList(screenWidth));

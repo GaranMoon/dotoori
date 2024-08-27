@@ -5,7 +5,10 @@ import { COLLAPSE_MAX, LayoutMode } from 'type/common';
 
 export function useLayout() {
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
-  const { isShowConfig, layoutMode, setLayoutMode, setIsShowConfig } = useSettingStore((state) => state);
+  const isShowConfig = useSettingStore((state) => state.isShowConfig);
+  const layoutMode = useSettingStore((state) => state.layoutMode);
+  const setLayoutMode = useSettingStore((state) => state.setLayoutMode);
+  const setIsShowConfig = useSettingStore((state) => state.setIsShowConfig);
 
   useEffect(() => {
     const handleResize = () => setScreenWidth(window.innerWidth);

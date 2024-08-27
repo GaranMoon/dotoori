@@ -9,7 +9,9 @@ import { useColorMapStore } from 'store/ColorMapStore';
 function ConfigButtonSet() {
   const { save, share } = useExport();
   const { confirmReset } = useReset();
-  const { colorMap, history, historyIndex } = useColorMapStore((state) => state);
+  const colorMap = useColorMapStore((state) => state.colorMap);
+  const history = useColorMapStore((state) => state.history);
+  const historyIndex = useColorMapStore((state) => state.historyIndex);
   const [disableExport, setDisableExport] = useState<boolean>(false);
 
   useEffect(() => {

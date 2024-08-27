@@ -12,8 +12,12 @@ interface Props {
 }
 
 function GridEditor({ mode }: Props) {
-  const { tool, picker, isOn, setIsOn } = useToolStore((state) => state);
-  const { colorMap, setColorMap } = useColorMapStore((state) => state);
+  const tool = useToolStore((state) => state.tool);
+  const picker = useToolStore((state) => state.picker);
+  const isOn = useToolStore((state) => state.isOn);
+  const setIsOn = useToolStore((state) => state.setIsOn);
+  const colorMap = useColorMapStore((state) => state.colorMap);
+  const setColorMap = useColorMapStore((state) => state.setColorMap);
 
   const handleDraw = (key?: string, isStart?: boolean) => {
     if (!key) return;
