@@ -4,6 +4,7 @@ import { Capture, Modal, Toast } from 'component/molecule';
 import { BottomArea, MiddleArea, TopArea } from 'component/template';
 import { useLoad } from 'hook/useLoad';
 import { useMapHistory } from 'hook/useMapHistory';
+import { usePopup } from 'hook/usePopup';
 import useShortcut from 'hook/useShortcut';
 import { useColorMapStore } from 'store/ColorMapStore';
 import { usePopupStore } from 'store/PopupStore';
@@ -22,6 +23,7 @@ function Home() {
   const setIsOn = useToolStore((state) => state.setIsOn);
   const colorMap = useColorMapStore((state) => state.colorMap);
   const isSaving = useSettingStore((state) => state.isSaving);
+  const { closeToast } = usePopup();
 
   useEffect(() => {
     load();
@@ -31,6 +33,11 @@ function Home() {
     if (isOn) {
       setIsOn(false);
       addHistory(colorMap);
+      return;
+    }
+    if (toast) {
+      closeToast();
+      return;
     }
   };
 

@@ -17,7 +17,7 @@ export function usePopup() {
   };
 
   const getGuideToast = (key: GuideKey) => {
-    if (!isShowGuide) return false;
+    if (toast || !isShowGuide) return false;
     let message = '';
     switch (key) {
       case 'save':
