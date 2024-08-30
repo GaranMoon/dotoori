@@ -22,7 +22,7 @@ function Capture() {
     const colors: string[] = [];
     for (let i = numOfBoxs; i > numOfBoxs - targetBoxs; i--) {
       const key = getColorMapKey(i - 1, numOfBoxs - 1);
-      const color = colorMap[key] || (backgroundColor === BackgroundColor.BLACK ? '#000000' : '#ffffff');
+      const color = colorMap[key] || (backgroundColor === BackgroundColor.WHITE ? '#ffffff' : '#000000');
       colors.push(color);
     }
     const averageColor = chroma.average(colors).hex();
