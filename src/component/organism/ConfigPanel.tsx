@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { getClass } from 'util/common';
 
-import { Adsense, Button } from 'component/atom';
+import { Button } from 'component/atom';
 import { GuideBox } from 'component/molecule';
 import { ArrowButtonSet, BoxRadioSet, ConfigButtonSet } from 'component/organism';
 import { useMapHistory } from 'hook/useMapHistory';
@@ -39,9 +39,9 @@ function ConfigPanel() {
             onClick={redo}
           />
         </GuideBox>
-        <div className={styles.ad}>
+        {/* <div className={styles.ad}>
           <Adsense type="vertical" />
-        </div>
+        </div> */}
       </div>
     );
   }

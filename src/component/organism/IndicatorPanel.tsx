@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { getClass } from 'util/common';
 
-import { Adsense, Button, ColorChip, Eraser, Grid } from 'component/atom';
+import { Button, ColorChip, Eraser, Grid } from 'component/atom';
 import { GuideBox } from 'component/molecule';
 import { ArrowButtonSet } from 'component/organism';
 import { useMapHistory } from 'hook/useMapHistory';
@@ -31,9 +31,9 @@ function IndicatorPanel() {
           <ArrowButtonSet />
         </div>
         <HistoryButton size="md" direction="undo" />
-        <div className={styles.ad}>
+        {/* <div className={styles.ad}>
           <Adsense type="vertical" />
-        </div>
+        </div> */}
       </div>
     );
   }
